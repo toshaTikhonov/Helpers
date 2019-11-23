@@ -88,7 +88,7 @@ void h_HexToStr(const char *pdata, unsigned int data_length, char *string)
     unsigned int i;
     unsigned int len;
 
-    len= data_length * 2 + 1; //with end 0
+    len= data_length * 2 + 1; /*c  0 на конце*/
     string[len-1] = 0;
     for(i = 0; i < data_length; ++i)
     {
@@ -108,7 +108,7 @@ void h_BcdToStr(const char *pdata, unsigned int data_length, char *string)
     unsigned int i;
     unsigned int len;
 
-    len= data_length * 2 + 1; //with end 0
+    len= data_length * 2 + 1; /*c  0 на конце*/
     string[len-1] = 0;
     for(i = 0; i < data_length; ++i)
     {
@@ -140,19 +140,17 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length)
 
     str_len = h_StrLen(string);
 
-    if( str_len/2 > *data_length )
+    if( str_len/2 <= *data_length )
     {
-           *data_length = 0;
-           return ;
-    }
-    else
-        *data_length = str_len/2;
-
-    for( i = 0; i < *data_length; i++ )
-    {
+        for( i = 0; i < *data_length; i++ )
+        {
             aux_ASCIIToHiHex( string[i*2], &data[i] );
             aux_ASCIIToLoHex( string[i*2 + 1], &data[i] );
+        }
+        *data_length = str_len/2;
     }
+    else
+        *data_length = 0;
 }
 /**
   @brief Преобразовать строку в последовательность данных формата BCD.
@@ -167,17 +165,17 @@ void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length)
 
     str_len = h_StrLen(string);
 
-    if( str_len/2 > *data_length )
+    if( str_len/2 <= *data_length )
     {
+        for( i = 0; i < str_len; i++ )
+        {
+            if(!(i%2))
+                aux_ASCIIToHiBcd( string[i], &data[i/2] );
+            else
+                aux_ASCIIToLoBcd( string[i], &data[i/2] );
+        }
+        *data_length = str_len/2;
+    }
+    else
         *data_length = 0;
-        return ;
-    }
-    *data_length = str_len/2;
-    for( i = 0; i < str_len; i++ )
-    {
-        if(!(i%2))
-            aux_ASCIIToHiBcd( string[i], &data[i/2] );
-        else
-            aux_ASCIIToLoBcd( string[i], &data[i/2] );
-    }
 }
