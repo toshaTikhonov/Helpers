@@ -1,6 +1,5 @@
 #include "h_cpc.h"
 
-
 /*
     Таблица преобразования символов таблицы 866 в 1251
 */
@@ -23,8 +22,6 @@ static const unsigned char  g_cp866_to_1251 [] =
         0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF, 
         0xA8, 0xB8, 0xAA, 0xBA, 0xAF, 0xBF, 0xA1, 0xA2, 0xB0, 0x95, 0xB7, 0x76, 0xB9, 0xA4, 0xA6, 0xA0, 
 };
-
-
 /*
     Кодовая страница перевода 1251 -> 866
 */
@@ -69,43 +66,30 @@ static const int g_cp1251_to_utf8[128] =
         0x80D1,0x81D1,0x82D1,0x83D1,0x84D1,0x85D1,0x86D1,0x87D1,
         0x88D1,0x89D1,0x8AD1,0x8BD1,0x8CD1,0x8DD1,0x8ED1,0x8FD1
 };
-
 /**
     @brief Преобразование символа заданного ch в кодировке 1251 
     в кодировку 866
-
     @param   ch   -   символ в колировке 1251
-
     @retval  символ в кодировке 866
 */
 unsigned char h_cp_1251_to_866 (unsigned char ch)
 {
     return g_cp1251_to_866 [ch];
 }
-
-
-
-
 /**
     @brief Преобразование символа заданного ch в кодировке 866 
     в кодировку 1251
-
     @param   ch   -   символ в колировке 866
-
     @retval  символ в кодировке 1251
 */
 unsigned char h_cp_866_to_1251 (unsigned char ch)
 {
     return g_cp866_to_1251 [ch];
 }
-
 /**
     @brief  Преобразование строки из кодовой таблицы 1251 в таблицу 866
-
     @param  p_str_src - исходные данные
-
     @param  p_str_dst   - буфер, куда помещается результат
-
     @retval указатель на p_str_dst
 */
 char * h_cp_1251_to_866_str (char *p_str_src, char *p_str_dst)
@@ -128,15 +112,10 @@ char * h_cp_1251_to_866_str (char *p_str_src, char *p_str_dst)
 
     return p_str_dst;
 }
-
-
 /**
     @brief  Преобразование строки из кодовой таблицы 866 в таблицу 1251
-
     @param  p_str_src - исходные данные
-
     @param  p_str_dst   - буфер, куда помещается результат
-
     @retval p_str_dst
 */
 char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst)
@@ -159,17 +138,11 @@ char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst)
 
     return p_str_dst;
 }
-
-
 /**
     @brief  Преобразование строки из кодовой таблицы IS08859 Part 5 (Latin/Cyrillic) в Win1251.
-
     @param  p_buf_src - исходные данные.
-
     @param  p_len     - длина исходных данных.
-
     @param  p_buf_dest   - буфер, куда помещается результат (может совпадать с исходным).
-
     @retval p_buf_dest.
 */
 unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char p_len, unsigned char *p_buf_dest)
