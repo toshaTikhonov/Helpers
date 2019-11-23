@@ -9,7 +9,8 @@ set(LIB_DIR "..")
 set(SRC_DIR ".")
 
 set(SRC_FILES 
-		${SRC_DIR}/h_str.c)
+		${SRC_DIR}/h_str.c
+		${SRC_DIR}/h_bin.c)
 
 add_library(${LIBRARY_NAME} STATIC ${SRC_FILES})
 
