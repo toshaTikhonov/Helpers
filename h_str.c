@@ -164,16 +164,20 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length)
 void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length)
 {
     unsigned int str_len,i;
-    for (str_len = 0; *string; ++string, (str_len)++);
+
+    str_len = h_StrLen(string);
 
     if( str_len/2 > *data_length )
     {
         *data_length = 0;
         return ;
     }
-    for( i = 0; i < *data_length; i++ )
+    *data_length = str_len/2;
+    for( i = 0; i < str_len; i++ )
     {
-            aux_ASCIIToHiBcd( string[i*2], &data[i] );
-            aux_ASCIIToLoBcd( string[i*2 + 1], &data[i] );
+        if(!(i%2))
+            aux_ASCIIToHiBcd( string[i], &data[i/2] );
+        else
+            aux_ASCIIToLoBcd( string[i], &data[i/2] );
     }
 }
