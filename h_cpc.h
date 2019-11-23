@@ -68,6 +68,14 @@ char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst);
 */
 unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char p_len, unsigned char *p_buf_dest);
 
+/**
+    @brief  Преобразование строки из кодовой таблицы Win1251 to utf8.
+    @param  p_str_src - исходные данные.
+    @param  p_str_dest   - буфер, куда помещается результат (может совпадать с исходным).
+    @retval void.
+*/
+void h_cp1251_to_utf8(const char *p_str_src, char *p_str_dst);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
