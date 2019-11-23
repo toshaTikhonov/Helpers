@@ -16,3 +16,17 @@ unsigned int  h_BigEndianToUINT( unsigned char* p_buf )
 
     return res_uint;
 } /* h_BigEndianToUINT */
+
+/**
+  @brief преобразование 4-х байтового целого в бинарные данные в формате big-endian
+  @param p_buf_dst - бинарных данных в формате big-endian
+  @param p_buf_src - 4-х байтовое целое
+  @return void.
+*/
+void h_UINTToBigEndian(unsigned char *p_buf_dst, unsigned int p_buf_src )
+{
+    p_buf_dst[3] = (unsigned char)p_buf_src; p_buf_src >>= 8;
+    p_buf_dst[2] = (unsigned char)p_buf_src; p_buf_src >>= 8;
+    p_buf_dst[1] = (unsigned char)p_buf_src; p_buf_src >>= 8;
+    p_buf_dst[0] = (unsigned char)p_buf_src;
+} /* h_UINTToBigEndian */
