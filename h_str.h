@@ -12,6 +12,13 @@ extern "C" {
   @return void.
 */
 void h_HexToStr(const char *pdata, unsigned int data_length, char *string);
+/**
+  @brief Преобразовать последовательность бинарных данных формата BCD в строку.
+  @param pdata            Указатель на исходные данные.
+  @param data_length        Длина исходных данных.
+  @param string            Указатель на выходные данные.
+  @return void.
+*/
 void h_BcdToStr(const char *pdata, unsigned int data_length, char *string);
 
 /**
@@ -30,6 +37,12 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length);
   @return void.
 */
 void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length);
+/**
+  @brief Расчет длины строки (аналог StrLen).
+  @param string            Указатель на исходные данные (строка).
+  @return unsigned int     Длина стрки без "\x00"
+*/
+unsigned int h_StrLen(const char* string);
 
 
 #ifdef __cplusplus

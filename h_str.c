@@ -96,6 +96,13 @@ void h_HexToStr(const char *pdata, unsigned int data_length, char *string)
         string[i * 2 + 1] = aux_LoHexToASCII(pdata[i]);
     }
 };
+/**
+  @brief Преобразовать последовательность бинарных данных формата BCD в строку.
+  @param pdata            Указатель на исходные данные.
+  @param data_length        Длина исходных данных.
+  @param string            Указатель на выходные данные.
+  @return void.
+*/
 void h_BcdToStr(const char *pdata, unsigned int data_length, char *string)
 {
     unsigned int i;
@@ -109,10 +116,15 @@ void h_BcdToStr(const char *pdata, unsigned int data_length, char *string)
         string[i * 2 + 1] = aux_LoBcdToByte(pdata[i]);
     }
 };
-unsigned int h_StrLen(const char* str)
+/**
+  @brief Расчет длины строки (аналог StrLen).
+  @param string            Указатель на исходные данные (строка).
+  @return unsigned int     Длина стрки без "\x00"
+*/
+unsigned int h_StrLen(const char* string)
 {
     unsigned int str_len;
-    for (str_len = 0; *str; ++str, (str_len)++);
+    for (str_len = 0; *string; ++string, (str_len)++);
     return str_len;
 }
 /**
