@@ -12,7 +12,9 @@ set(SRC_FILES
 		${SRC_DIR}/h_str.c
 		${SRC_DIR}/h_bin.c
 		${SRC_DIR}/h_cpc.c
+		${SRC_DIR}/h_lggr.c
 		)
 
 add_library(${LIBRARY_NAME} STATIC ${SRC_FILES})
+#add_library(${LIBRARY_NAME} SHARED ${SRC_FILES})
 
