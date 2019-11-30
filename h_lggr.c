@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include "h_lggr.h"
 
-static int log_level;
+static int log_level = 0;
 
 
 static unsigned int h_get_time(void)
@@ -50,6 +50,7 @@ void h_lggr_printf_line(const char *pszFmt, ...)
   h_lggr_print_log(Buffer, 0);
   h_lggr_print_log(pszFmt, &args);
   h_lggr_print_log("\r\n", 0);
+  va_end(args);
   va_end(lists);
 }
 void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned int lsize)
