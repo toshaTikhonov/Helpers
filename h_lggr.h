@@ -7,6 +7,8 @@ extern "C" {
 
 void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned int lsize);
 void h_lggr_printf_line(const char *pszFmt, ...);
+void h_lggr_inc_level( void );
+void h_lggr_dec_level( void );
 
 
 #ifdef __cplusplus
