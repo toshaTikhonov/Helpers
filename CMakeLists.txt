@@ -15,8 +15,8 @@ set(PROJECT_DESCRIPTION "Helpers library for C applications")
 set(PROJECT_HOMEPAGE_URL "https://armshine.net:3000/tosha/Helpers/")
 set(PROJECT_BUGREPORT_PATH "https://armshine.net:3000/tosha/Helpers/issues")
 set(LIBRARY_VERSION_MAJOR "0")
-set(LIBRARY_VERSION_MINOR "0")
-set(LIBRARY_VERSION_PATCH "1")
+set(LIBRARY_VERSION_MINOR "1")
+set(LIBRARY_VERSION_PATCH "0")
 set(PROJECT_VERSION "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
 
 set(LIBRARY_VERSION "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
@@ -93,3 +93,97 @@ target_link_libraries(${LIBRARY_NAME} ${LIBS})
 configure_file(${INC_DIR}/helpers-cfg.h.in ${PROJECT_BINARY_DIR}/helpers-cfg.h)
 set (CMAKE_EXTRA_INCLUDE_FILES ${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_BINARY_DIR})
+
+# install target
+
+option(INSTALL_HEADER "Install the header files" ON) # Install header file or not
+
+configure_file(lib${LIBRARY_NAME}.pc.in lib${LIBRARY_NAME}.pc @ONLY)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lib${LIBRARY_NAME}.pc
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+
+set(TARGETS ${LIBRARY_NAME})
+if (BUILD_STATIC)
+    set(TARGETS ${TARGETS} library_name_static)
+endif ()
+
+if (INSTALL_HEADER)
+    install(TARGETS ${TARGETS}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#    install(DIRECTORY examples/
+#            DESTINATION ${CMAKE_INSTALL_DOCDIR}/examples/ COMPONENT runtime)
+    install(FILES README.md
+            DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT runtime)
+else ()
+    install(TARGETS ${TARGETS}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif ()
+
+# uninstall target
+
+if (NOT TARGET uninstall)
+    configure_file(
+            "${CMAKE_MODULE_PATH}/CMakeUninstall.cmake.in"
+            "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+            IMMEDIATE @ONLY)
+    add_custom_target(uninstall
+            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+endif ()
+
+# packaging
+
+set(CPACK_PACKAGE_VERSION_MAJOR ${LIBRARY_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${LIBRARY_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${LIBRARY_VERSION_PATCH})
+
+if (INSTALL_HEADER)
+    set(PACKAGE_FILE_NAME
+            "lib${CMAKE_PROJECT_NAME}-dev_${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+else ()
+    set(PACKAGE_FILE_NAME
+            "lib${CMAKE_PROJECT_NAME}_${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+endif ()
+set(PACKAGE_IGNORED_FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/;/.git/;.gitignore;~$;${CPACK_SOURCE_IGNORE_FILES}")
+
+set(CPACK_PACKAGE_NAME "libHelpers")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Helpers funcs library for C applications")
+set(CPACK_GENERATOR "TGZ;DEB")
+set(CPACK_PACKAGE_VERSION_MAJOR ${LIBRARY_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${LIBRARY_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${LIBRARY_VERSION_PATCH})
+
+option(BUILD_RPM "Build a RPM for your system" OFF)
+if (BUILD_RPM)
+  set(CPACK_GENERATOR "TGZ;DEB;RPM")
+  set(CPACK_RPM_PACKAGE_LICENSE "LGPL")
+  set(CPACK_RPM_PACKAGE_URL "http://babelouest.github.io/yder/")
+endif ()
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "support@armshine.net")
+
+#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4), liborcania (>= ${ORCANIA_VERSION_REQUIRED})")
+if (INSTALL_HEADER)
+endif ()
+
+set(CPACK_PACKAGE_FILE_NAME ${PACKAGE_FILE_NAME})
+
+set(CPACK_SOURCE_GENERATOR "TGZ")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME ${PACKAGE_FILE_NAME})
+set(CPACK_SOURCE_IGNORE_FILES ${PACKAGE_IGNORED_FILES})
+
+include(CPack)
+
+add_custom_target(dist_y
+        COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+
+message(STATUS "Build static library: ${BUILD_STATIC}")
+message(STATUS "Build testing tree: ${BUILD_HELPERS_TESTING}")
+message(STATUS "Install the header files: ${INSTALL_HEADER}")
+message(STATUS "Build RPM package: ${BUILD_RPM}") 
