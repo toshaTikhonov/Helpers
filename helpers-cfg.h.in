@@ -1,0 +1,19 @@
+/**
+ * 
+ * Helpers Framework
+ * 
+ * helpers framework library
+ * 
+ * helpers-cfg.h: configuration file
+ * 
+ * Copyright 2019 Anton Tikhonov <support@armshine.net>
+ *
+ *
+ */
+
+#ifndef __HELPERS_CFG_H__
+#define __HELPERS_CFG_H__
+
+#define HELPERS_VERSION ${PROJECT_VERSION}
+
+#endif /* __HELPERS_CFG_H__ */
