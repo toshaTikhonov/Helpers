@@ -44,11 +44,13 @@ if (_GNU_SOURCE)
     add_definitions(-D_GNU_SOURCE)
 endif ()
 
-message( STATUS ${LIBRARY_NAME})
+# directories and source
 
-set(LIB_DIR "..")
-set(SRC_DIR ".")
-set(INC_DIR ".")
+set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+include_directories(${INC_DIR})
+
 
 set(SRC_FILES 
 		${SRC_DIR}/h_str.c
