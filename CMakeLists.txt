@@ -94,6 +94,54 @@ configure_file(${INC_DIR}/helpers-cfg.h.in ${PROJECT_BINARY_DIR}/helpers-cfg.h)
 set (CMAKE_EXTRA_INCLUDE_FILES ${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 
+# tests
+
+option(BUILD_HELPERS_TESTING "Build the testing tree." OFF) # because we don not use include(CTest)
+
+if (BUILD_HELPERS_TESTING)
+    include(FindCheck)
+    find_package(Check)
+    if (CHECK_FOUND)
+        if (NOT WIN32 AND NOT APPLE)
+            include(FindSubunit)
+            find_package(Subunit REQUIRED)
+        endif ()
+
+        enable_testing()
+
+        set(CMAKE_CTEST_COMMAND ctest -V)
+
+        set(TST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
+        set(LIBS ${LIBRARY_NAME} ${LIBS} ${CHECK_LIBRARIES})
+        if (NOT WIN32)
+            find_package(Threads REQUIRED)
+            set(LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT} m)
+        endif ()
+        if (NOT APPLE)
+            set(LIBS ${LIBS} rt)
+        endif ()
+        if (NOT WIN32 AND NOT APPLE)
+            set(LIBS ${LIBS} ${SUBUNIT_LIBRARIES})
+        endif ()
+
+        set(TESTS lggr_test)
+
+        configure_file(
+                "${CMAKE_MODULE_PATH}/CTestCustom.cmake.in"
+                "${CMAKE_CURRENT_BINARY_DIR}/CTestCustom.cmake"
+                @ONLY)
+
+        foreach (t ${TESTS})
+            add_executable(${t} EXCLUDE_FROM_ALL ${TST_DIR}/${t}.c)
+            target_include_directories(${t} PUBLIC ${TST_DIR})
+            target_link_libraries(${t} PUBLIC ${LIBS})
+            add_test(NAME ${t}
+                    WORKING_DIRECTORY ${TST_DIR}
+                    COMMAND ${t})
+        endforeach ()
+    endif ()
+endif ()
+
 # install target
 
 option(INSTALL_HEADER "Install the header files" ON) # Install header file or not

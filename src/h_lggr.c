@@ -16,15 +16,17 @@ static unsigned int h_get_time(void)
 static void h_lggr_print_log( const char* pszFmt, va_list* valist )
 {
     char buf[256];
+    FILE *output = stdout;
     if (valist)
     {
         vsprintf(buf,pszFmt,*valist);
-        printf("%s",buf);
+        fprintf(output,"%s",buf);
     }
     else
     {
-        printf("%s",pszFmt);
+        fprintf(output,"%s",pszFmt);
     }
+    fflush(output);
 }
 static void h_lggr_generate_time(char* buffer, unsigned int size)
 {
