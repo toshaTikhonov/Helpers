@@ -57,7 +57,7 @@ void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned i
 {
     char buff[34];
     unsigned int pos;
-    int i;
+    unsigned int i;
     unsigned char* p_data = (unsigned char*)p_p_data;
 
     h_lggr_printf_line("%s(%d bytes):", psz_title, lsize);
