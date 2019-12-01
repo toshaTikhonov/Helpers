@@ -48,14 +48,46 @@ message( STATUS ${LIBRARY_NAME})
 
 set(LIB_DIR "..")
 set(SRC_DIR ".")
+set(INC_DIR ".")
 
 set(SRC_FILES 
 		${SRC_DIR}/h_str.c
 		${SRC_DIR}/h_bin.c
 		${SRC_DIR}/h_cpc.c
 		${SRC_DIR}/h_lggr.c
+        ${INC_DIR}/h_str.h
+        ${INC_DIR}/h_bin.h
+        ${INC_DIR}/h_cpc.h
+        ${INC_DIR}/h_lggr.h
 		)
+# shared library
 
-add_library(${LIBRARY_NAME} STATIC ${SRC_FILES})
-#add_library(${LIBRARY_NAME} SHARED ${SRC_FILES})
+add_library(${LIBRARY_NAME} SHARED ${SRC_FILES})
+if (NOT MSVC)
+    set_target_properties(${LIBRARY_NAME} PROPERTIES
+            COMPILE_OPTIONS -Wextra
+            PUBLIC_HEADER "${INC_DIR}/h_bin.h;${INC_DIR}/h_cpc.h;${INC_DIR}/h_lggr.h;${INC_DIR}/h_str.h;${PROJECT_BINARY_DIR}/helpers-cfg.h"
+            VERSION "${LIBRARY_VERSION}"
+            SOVERSION "${LIBRARY_SOVERSION}")
+endif()
+if (WIN32)
+    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX "-${LIBRARY_VERSION_MAJOR}.dll")
+endif ()
 
+# static library
+
+option(BUILD_STATIC "Build static library." OFF)
+
+if (BUILD_STATIC)
+    add_library(library_name_static STATIC ${SRC_FILES})
+    target_compile_definitions(library_name_static PUBLIC -DO_STATIC_LIBRARY)
+    set_target_properties(library_name_static PROPERTIES
+            OUTPUT_NAME ${LIBRARY_NAME})
+endif ()
+
+target_link_libraries(${LIBRARY_NAME} ${LIBS})
+
+# build helpers-cfg.h file
+configure_file(${INC_DIR}/helpers-cfg.h.in ${PROJECT_BINARY_DIR}/helpers-cfg.h)
+set (CMAKE_EXTRA_INCLUDE_FILES ${PROJECT_BINARY_DIR})
+include_directories(${PROJECT_BINARY_DIR})
