@@ -133,7 +133,7 @@ if (BUILD_HELPERS_TESTING)
 
         foreach (t ${TESTS})
             add_executable(${t} EXCLUDE_FROM_ALL ${TST_DIR}/${t}.c)
-            target_include_directories(${t} PUBLIC ${TST_DIR})
+            target_include_directories(${t} PUBLIC ${TST_DIR} ${CHECK_INCLUDE_DIRS} ${SUBUNIT_INCLUDE_DIRS})
             target_link_libraries(${t} PUBLIC ${LIBS})
             add_test(NAME ${t}
                     WORKING_DIRECTORY ${TST_DIR}
