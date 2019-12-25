@@ -228,3 +228,69 @@ char *h_StrnDup(const char *string, unsigned int n)
     result[len-1] = 0;
     return result;
 }
+char* h_StrCpy(char *dst, const char *src)
+{
+    char *d = dst;
+    while (*src!= '\0')
+        *d++ = *src++;
+    return dst;
+}
+char* h_StrCat(char *dst, const char *src)
+{
+    char *d = dst;
+    while(*d) d++;
+    while(*src!='\0')
+        *d++ = *src++;
+    return dst;
+}
+
+
+/*
+	Gets the offset of one string in another string
+*/
+int h_StrIndexOf(const char *a, char *b)
+{
+	char *offset = (char*)h_StrStr(a, b);
+	return offset - a;
+}
+
+/*
+	Checks if one string contains another string
+*/
+int h_StrContains(const char *haystack, const char *needle)
+{
+	char *pos = (char*)h_StrStr(haystack, needle);
+	if(pos)
+		return 1;
+	else
+		return 0;
+}
+
+/*
+	Removes last character from string
+*/
+char* h_TrimEnd(char *string, char to_trim)
+{
+	char last_char = string[h_StrLen(string) -1];
+	if(last_char == to_trim)
+	{
+		char *new_string = string;
+		new_string[h_StrLen(string) - 1] = 0;
+		return new_string;
+	}
+	else
+	{
+		return string;
+	}
+}
+
+/*
+	Concecates two strings, a wrapper for strcat from string.h, handles the resizing and copying
+*/
+char* h_StrCatPtr(char *a, char *b)
+{
+	char *target = (char*)h_malloc(h_StrLen(a) + h_StrLen(b) + 1);
+	h_StrCpy(target, a);
+	h_StrCat(target, b);
+	return target;
+}

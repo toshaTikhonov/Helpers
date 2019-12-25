@@ -66,7 +66,15 @@ char* h_StrDup(const char *string);
   @param n        количество символов, которые надо скопировать.
   @return char*   новая строка n символов
 */
-char *h_StrnDup(const char *string, unsigned int n);
+char* h_StrnDup(const char *string, unsigned int n);
+
+char* h_StrCpy(char *dst, const char *src);
+char* h_StrCat(char *dst, const char *src);
+
+int h_StrIndexOf(const char *a, char *b);
+int h_StrContains(const char *haystack, const char *needle);
+char* h_TrimEnd(char *string, char to_trim);
+char* h_StrCatPtr(char *a, char *b);
 
 #ifdef __cplusplus
 }
