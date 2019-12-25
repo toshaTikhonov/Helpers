@@ -4,6 +4,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+
+#ifndef NULL
+#define NULL 0
+#endif
 /**
   @brief Преобразовать последовательность бинарных данных в строку.
   @param pdata            Указатель на исходные данные.
@@ -44,6 +48,13 @@ void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length);
 */
 unsigned int h_StrLen(const char* string);
 
+/**
+  @brief возвращает указатель на первое вхождение в строку.
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
+  @return char*    указатель на первое вхождение в строку, либо NULL.
+ */
+char* h_StrStr(const char * haystack, const char * needle);
 
 #ifdef __cplusplus
 }

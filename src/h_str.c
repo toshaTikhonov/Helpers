@@ -179,3 +179,19 @@ void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length)
     else
         *data_length = 0;
 }
+/**
+  @brief возвращает указатель на первое вхождение в строку.
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
+  @return char*    указатель на первое вхождение в строку, либо NULL.
+ */
+char* h_StrStr(const char *haystack, const char *needle)
+{
+    int i, j, n = h_StrLen(needle);
+    for (i = 0, j = 0; haystack[i]; i++, j++)
+    {
+        if (haystack[i] != needle[j]) j = -1;
+        if (j == n-1) return (char *)haystack + i - n + 1;
+    }
+    return NULL;
+}

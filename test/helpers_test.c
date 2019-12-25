@@ -8,10 +8,9 @@
 
 #include <check.h>
 #include "h_lggr.h"
+#include "h_str.h"
 
 char message[1024];
-//char app_name[128];
-//int level;
 
 START_TEST(test_h_lggr_printf_line)
 {
@@ -33,15 +32,23 @@ START_TEST(test_h_lggr_printf_line)
 
 }
 END_TEST
+START_TEST(test_h_StrStr)
+{
+    char message[5] = "test";
+    char* res = h_StrStr("this is a test", "test");
+    ck_assert_str_eq(message, res);
+}
+END_TEST
 
 static Suite *helpers_lggr_suite(void)
 {
   Suite *s;
   TCase *tc_core;
 
-  s = suite_create("lggr tests functions");
+  s = suite_create("helpers tests functions");
   tc_core = tcase_create("test_helpers");
   tcase_add_test(tc_core, test_h_lggr_printf_line);
+  tcase_add_test(tc_core, test_h_StrStr);
   tcase_set_timeout(tc_core, 30);
   suite_add_tcase(s, tc_core);
 
@@ -53,7 +60,7 @@ int main(int argc, char *argv[])
   int number_failed;
   Suite *s;
   SRunner *sr;
-  
+
   s = helpers_lggr_suite();
   sr = srunner_create(s);
 

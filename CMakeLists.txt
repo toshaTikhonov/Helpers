@@ -124,7 +124,7 @@ if (BUILD_HELPERS_TESTING)
             set(LIBS ${LIBS} ${SUBUNIT_LIBRARIES})
         endif ()
 
-        set(TESTS lggr_test)
+        set(TESTS helpers_test)
 
         configure_file(
                 "${CMAKE_MODULE_PATH}/CTestCustom.cmake.in"
