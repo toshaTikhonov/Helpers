@@ -57,10 +57,12 @@ set(SRC_FILES
 		${SRC_DIR}/h_bin.c
 		${SRC_DIR}/h_cpc.c
 		${SRC_DIR}/h_lggr.c
+        ${SRC_DIR}/h_memory.c
         ${INC_DIR}/h_str.h
         ${INC_DIR}/h_bin.h
         ${INC_DIR}/h_cpc.h
         ${INC_DIR}/h_lggr.h
+        ${INC_DIR}/h_memory.h
 		)
 # shared library
 

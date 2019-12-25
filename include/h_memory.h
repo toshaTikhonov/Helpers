@@ -1,6 +1,8 @@
 #ifndef __H_MEMORY_H__
 #define __H_MEMORY_H__
 
+#include <stdlib.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -9,15 +11,16 @@ extern "C" {
 #undef realloc
 #undef free
 
-typedef void *(*o_malloc_t)(size_t);
-typedef void *(*o_realloc_t)(void *, size_t);
-typedef void (*o_free_t)(void *);
+typedef void *(*h_malloc_t)(size_t);
+typedef void *(*h_realloc_t)(void *, size_t);
+typedef void (*h_free_t)(void *);
 
-void * o_malloc(size_t size);
-void * o_realloc(void * ptr, size_t size);
-void o_free(void * ptr);
-void o_set_alloc_funcs(o_malloc_t malloc_fn, o_realloc_t realloc_fn, o_free_t free_fn);
-void o_get_alloc_funcs(o_malloc_t * malloc_fn, o_realloc_t * realloc_fn, o_free_t * free_fn);
+void * h_malloc(size_t size);
+void * h_realloc(void * ptr, size_t size);
+void h_free(void * ptr);
+void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t free_fn);
+void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn);
+void*  h_MemCpy(void* dst, const void* src, size_t size);
 
 #ifdef __cplusplus
 }
