@@ -224,6 +224,7 @@ char *h_StrnDup(const char *string, unsigned int n)
     char *result = (char*) h_malloc (len);
     if (result == (char*) 0)
         return (char*) NULL;
+    h_MemCpy (result, string, len-1);
     result[len-1] = 0;
-    return (char*) h_MemCpy (result, string, len-1);
+    return result;
 }
