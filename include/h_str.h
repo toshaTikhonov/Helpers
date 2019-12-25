@@ -54,6 +54,12 @@ unsigned int h_StrLen(const char* string);
   @return char*    указатель на первое вхождение в строку, либо NULL.
  */
 char* h_StrStr(const char * haystack, const char * needle);
+/**
+  @brief дубликат строки (аналог strdup).
+  @param string   Указатель на исходные данные (строка).
+  @return char*   новая строка
+*/
+char* h_StrDup(const char *string);
 
 #ifdef __cplusplus
 }

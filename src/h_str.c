@@ -1,4 +1,5 @@
 #include "h_str.h"
+#include "h_memory.h"
 
 #define MASK_11110000 0xF0
 #define MASK_00001111 0x0F
@@ -193,5 +194,19 @@ char* h_StrStr(const char *haystack, const char *needle)
         if (haystack[i] != needle[j]) j = -1;
         if (j == n-1) return (char *)haystack + i - n + 1;
     }
-    return NULL;
+    return (char*)NULL;
+}
+/**
+  @brief дубликат строки (аналог strdup).
+  @param string   Указатель на исходные данные (строка).
+  @return char*   новая строка
+*/
+char* h_StrDup(const char *string)
+{
+    int len = h_StrLen (string) + 1;         // длина строки включая нулевой символ
+    char *result = (char*) h_malloc (len);
+    if (result == (char*) 0)             // или if (!result)
+        return (char*) NULL;
+    // мы уже знаем длину строки и хотим использовать RVO
+    return (char*) h_MemCpy (result, string, len);
 }
