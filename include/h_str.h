@@ -47,7 +47,6 @@ void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length);
   @return unsigned int     Длина стрки без "\x00"
 */
 unsigned int h_StrLen(const char* string);
-
 /**
   @brief возвращает указатель на первое вхождение в строку.
   @param haystack  указатель на строку в которой осуществляется поиск.
