@@ -70,11 +70,14 @@ char* h_StrnDup(const char *string, unsigned int n);
 
 char* h_StrCpy(char *dst, const char *src);
 char* h_StrCat(char *dst, const char *src);
+char* h_StrnCpy(char *dest, const char *src, unsigned int count);
 
 int h_StrIndexOf(const char *a, char *b);
 int h_StrContains(const char *haystack, const char *needle);
 char* h_TrimEnd(char *string, char to_trim);
 char* h_StrCatPtr(char *a, char *b);
+char* h_StrReplace(char *search , char *replace , char *subject);
+char* h_GetUntil(char *haystack, char *until);
 
 #ifdef __cplusplus
 }

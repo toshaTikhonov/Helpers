@@ -235,6 +235,19 @@ char* h_StrCpy(char *dst, const char *src)
         *d++ = *src++;
     return dst;
 }
+char* h_StrnCpy(char *dest, const char *src, unsigned int count)
+{
+    char *tmp = dest;
+
+    while (count) {
+        if ((*tmp = *src) != 0)
+            src++;
+        tmp++;
+        count--;
+    }
+    return dest;
+}
+
 char* h_StrCat(char *dst, const char *src)
 {
     char *d = dst;
@@ -293,4 +306,35 @@ char* h_StrCatPtr(char *a, char *b)
 	h_StrCpy(target, a);
 	h_StrCat(target, b);
 	return target;
+}
+char* h_StrReplace(char *search , char *replace , char *subject)
+{
+	char  *p = NULL , *old = NULL , *new_subject = NULL ;
+	int c = 0 , search_size;
+	search_size = h_StrLen(search);
+	for(p = h_StrStr(subject , search) ; p != NULL ; p = h_StrStr(p + search_size , search))
+	{
+		c++;
+	}	
+	c = ( h_StrLen(replace) - search_size )*c + h_StrLen(subject);
+	new_subject = (char*)h_malloc( c );
+	h_StrCpy(new_subject , "");
+	old = subject;	
+	for(p = h_StrStr(subject , search) ; p != NULL ; p = h_StrStr(p + search_size , search))
+	{
+		h_StrnCpy(new_subject + h_StrLen(new_subject) , old , p - old);
+		h_StrCpy(new_subject + h_StrLen(new_subject) , replace);
+		old = p + search_size;
+	}
+	h_StrCpy(new_subject + h_StrLen(new_subject) , old);
+	return new_subject;
+}
+
+/*
+	Get's all characters until '*until' has been found
+*/
+char* h_GetUntil(char *haystack, char *until)
+{
+	int offset = h_StrIndexOf(haystack, until);
+	return h_StrnDup(haystack, offset);
 }
