@@ -60,6 +60,13 @@ char* h_StrStr(const char * haystack, const char * needle);
   @return char*   новая строка
 */
 char* h_StrDup(const char *string);
+/**
+  @brief дубликат строки n байт (аналог strndup).
+  @param string   Указатель на исходные данные (строка).
+  @param n        количество символов, которые надо скопировать.
+  @return char*   новая строка n символов
+*/
+char *h_StrnDup(const char *string, unsigned int n);
 
 #ifdef __cplusplus
 }

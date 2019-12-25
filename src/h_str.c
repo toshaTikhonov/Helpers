@@ -210,3 +210,20 @@ char* h_StrDup(const char *string)
     // мы уже знаем длину строки и хотим использовать RVO
     return (char*) h_MemCpy (result, string, len);
 }
+/**
+  @brief дубликат строки n байт (аналог strndup).
+  @param string   Указатель на исходные данные (строка).
+  @param n        количество символов, которые надо скопировать.
+  @return char*   новая строка n символов
+*/
+char *h_StrnDup(const char *string, unsigned int n)
+{
+    unsigned int len = n + 1;
+    if(len - 1 > h_StrLen(string))
+        return (char*) NULL;
+    char *result = (char*) h_malloc (len);
+    if (result == (char*) 0)
+        return (char*) NULL;
+    result[len-1] = 0;
+    return (char*) h_MemCpy (result, string, len-1);
+}
