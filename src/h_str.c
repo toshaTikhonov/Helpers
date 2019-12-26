@@ -325,6 +325,20 @@ char*  h_StrUpr(char* str)
             *p -= 'a' - 'A';
     return str;
 }
+/**
+  @brief  преобразование из строки в int (atoi).
+  @param  str  указатель на строку.
+  @return int
+ */
+int h_AtoI(char* str)
+{
+    int i;
+    int res = 0;
+
+    for (i = 0; str[i] != '\0'; ++i)
+        res = res * 10 + str[i] - '0';
+    return res;
+}
 /*
 	Gets the offset of one string in another string
 */

@@ -115,6 +115,12 @@ char*  h_StrLwr(char* str);
   @return char*    указатель строку.
  */
 char*  h_StrUpr(char* str);
+/**
+  @brief  преобразование из строки в int (atoi).
+  @param  str  указатель на строку.
+  @return int
+ */
+int h_AtoI(char* str);
 /*
  *
 ATOI
