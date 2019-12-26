@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include <memory.h>
 #include <time.h>
 #include <stdarg.h>
 #include "h_lggr.h"
+#include "h_memory.h"
+#include "h_str.h"
 
 static int log_level = 0;
 
@@ -63,15 +64,15 @@ void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned i
     unsigned char* p_data = (unsigned char*)p_p_data;
 
     h_lggr_printf_line("%s(%d bytes):", psz_title, lsize);
-    memset(buff,0, sizeof(buff));
+    h_MemSet(buff,0, sizeof(buff));
     for(i = 0; i < lsize; i++)
     {
-        pos = strlen(buff);
+        pos = h_StrLen(buff);
         sprintf(&buff[pos],"%02X ",p_data[i]);
         if (i + 1 == lsize || !((i + 1) % 0xF))
         {
             h_lggr_printf_line("%s", buff);
-            memset(buff,0, sizeof(buff));
+            h_MemSet(buff,0, sizeof(buff));
         }
     }
 }

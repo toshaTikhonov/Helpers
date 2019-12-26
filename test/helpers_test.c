@@ -31,6 +31,10 @@ START_TEST(test_h_lggr_printf_line)
   h_lggr_printf_line("%s","fourth test");
   ck_assert_str_eq(message, "");
 
+  message[0] = '\0';
+  h_StrCpy(message,"aaab");
+  h_lggr_print_memory("data",message,5);
+
 }
 END_TEST
 
