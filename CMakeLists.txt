@@ -70,7 +70,7 @@ add_library(${LIBRARY_NAME} SHARED ${SRC_FILES})
 if (NOT MSVC)
     set_target_properties(${LIBRARY_NAME} PROPERTIES
             COMPILE_OPTIONS -Wextra
-            PUBLIC_HEADER "${INC_DIR}/h_bin.h;${INC_DIR}/h_cpc.h;${INC_DIR}/h_lggr.h;${INC_DIR}/h_str.h;${PROJECT_BINARY_DIR}/helpers-cfg.h"
+            PUBLIC_HEADER "${INC_DIR}/h_bin.h;${INC_DIR}/h_cpc.h;${INC_DIR}/h_lggr.h;${INC_DIR}/h_str.h;${INC_DIR}/h_memory.h;${PROJECT_BINARY_DIR}/helpers-cfg.h"
             VERSION "${LIBRARY_VERSION}"
             SOVERSION "${LIBRARY_SOVERSION}")
 endif()
