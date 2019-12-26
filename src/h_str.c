@@ -386,6 +386,51 @@ long int h_AtoL(char *string)
     }
     return result;
 }
+#define NUMBER_OF_DIGITS 32
+
+/**
+ @brief конвертирует длинное целое число пит в эквивалентную строку и помещает результат
+        по адресу, указанному параметром str.
+ @param value
+ @param string
+ @param radix
+*/
+void h_UltoA(unsigned long value, char* string, int radix)
+{
+    unsigned char index;
+    char buffer[NUMBER_OF_DIGITS];  /* space for NUMBER_OF_DIGITS + '\0' */
+
+    index = NUMBER_OF_DIGITS;
+
+    do {
+        buffer[--index] = '0' + (value % radix);
+        if ( buffer[index] > '9') buffer[index] += 'A' - ':'; /* continue with A, B,... */
+        value /= radix;
+    } while (value != 0);
+
+    do {
+        *string++ = buffer[index++];
+    } while ( index < NUMBER_OF_DIGITS );
+
+    *string = 0;  /* string terminator */
+}
+/**
+ @brief конвертирует длинное целое число пит в эквивалентную строку и помещает результат
+        по адресу, указанному параметром str.
+ @param value
+ @param string
+ @param radix
+*/
+void h_LtoA(long value, char* string, int radix)
+{
+    if (value < 0 && radix == 10) {
+        *string++ = '-';
+        h_UltoA(-value, string, radix);
+    }
+    else {
+        h_UltoA(value, string, radix);
+    }
+}
 /*
 	Gets the offset of one string in another string
 */

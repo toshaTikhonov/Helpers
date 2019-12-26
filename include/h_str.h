@@ -133,12 +133,22 @@ int h_isspace(int c);
   @return long int
  */
 long int h_AtoL(char *string);
-
-/*
- *
-LTOA
-ATOL
- */
+/**
+ @brief конвертирует длинное целое число пит в эквивалентную строку и помещает результат
+        по адресу, указанному параметром str.
+ @param value
+ @param string
+ @param radix
+*/
+void h_UltoA(unsigned long value, char* string, int radix);
+/**
+ @brief конвертирует длинное целое число пит в эквивалентную строку и помещает результат
+        по адресу, указанному параметром str.
+ @param value
+ @param string
+ @param radix
+*/
+void h_LtoA(long value, char* string, int radix);
 
 int h_StrIndexOf(const char *a, char *b);
 int h_StrContains(const char *haystack, const char *needle);
