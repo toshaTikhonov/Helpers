@@ -161,12 +161,48 @@ void h_UltoA(unsigned long value, char* string, int radix);
  @param radix
 */
 void h_LtoA(long value, char* string, int radix);
-
+/**
+  @brief  возвращается смещение строки в другой строке
+  @param  a  указатель на строку.
+  @param  b  указатель на подстроку.
+  @return int
+ */
 int h_StrIndexOf(const char *a, char *b);
+/**
+  @brief проверка в строке содержания другой строки
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
+  @return int
+ */
 int h_StrContains(const char *haystack, const char *needle);
+/**
+  @brief удаление последнего символа в строке
+  @param string  указатель на строку в которой осуществляется поиск.
+  @param to_trim символ.
+  @return char*
+ */
 char* h_TrimEnd(char *string, char to_trim);
-char* h_StrCatPtr(char *a, char *b);
+/**
+  @brief объединение двух строк обертка strcat. Создается новый буфер (нужен h_free после использования)
+  @param a   Указатель на строку.
+  @param b   Указатель на строку.
+  @return char*   Указатель на новую строку.
+*/
+char* h_StrCatNewBuf(char *a, char *b);
+/**
+  @brief поиск и замена символов в строке.
+  @param search   Указатель на строку, которую ищем.
+  @param replace   Указатель на строку, на что меняем.
+  @param subject   Указатель на строку, в которой производим манипуляции.
+  @return char*   Указатель на новую строку.
+*/
 char* h_StrReplace(char *search , char *replace , char *subject);
+/**
+  @brief удаление всех символов до символов '*until' в строке.
+  @param haystack Указатель на подстроку, которую хотим удалить в строке.
+  @param until    Указатель на строку, до которой происходит удаление.
+  @return char*   Указатель на новую строку.
+*/
 char* h_GetUntil(char *haystack, char *until);
 
 #ifdef __cplusplus

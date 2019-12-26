@@ -382,28 +382,36 @@ long int h_AtoL(char *string)
     unsigned int digit;
     int sign;
 
-    while (h_IsSpace(*string)) {
+    while (h_IsSpace(*string))
+    {
         string += 1;
     }
-    if (*string == '-') {
+    if (*string == '-')
+    {
         sign = 1;
         string += 1;
-    } else {
+    }
+    else
+    {
         sign = 0;
-        if (*string == '+') {
+        if (*string == '+')
+        {
             string += 1;
         }
     }
 
-    for ( ; ; string += 1) {
+    for ( ; ; string += 1)
+    {
         digit = *string - '0';
-        if (digit > 9) {
+        if (digit > 9)
+        {
             break;
         }
         result = (10*result) + digit;
     }
 
-    if (sign) {
+    if (sign)
+    {
         return -result;
     }
     return result;
@@ -424,13 +432,15 @@ void h_UltoA(unsigned long value, char* string, int radix)
 
     index = NUMBER_OF_DIGITS;
 
-    do {
+    do
+    {
         buffer[--index] = '0' + (value % radix);
         if ( buffer[index] > '9') buffer[index] += 'A' - ':'; /* continue with A, B,... */
         value /= radix;
     } while (value != 0);
 
-    do {
+    do
+    {
         *string++ = buffer[index++];
     } while ( index < NUMBER_OF_DIGITS );
 
@@ -445,26 +455,33 @@ void h_UltoA(unsigned long value, char* string, int radix)
 */
 void h_LtoA(long value, char* string, int radix)
 {
-    if (value < 0 && radix == 10) {
+    if (value < 0 && radix == 10)
+    {
         *string++ = '-';
         h_UltoA(-value, string, radix);
     }
-    else {
+    else
+    {
         h_UltoA(value, string, radix);
     }
 }
-/*
-	Gets the offset of one string in another string
-*/
+/**
+  @brief  возвращается смещение строки в другой строке
+  @param  a  указатель на строку.
+  @param  b  указатель на строку , которая ищется.
+  @return int
+ */
 int h_StrIndexOf(const char *a, char *b)
 {
 	char *offset = (char*)h_StrStr(a, b);
 	return offset - a;
 }
-
-/*
-	Checks if one string contains another string
-*/
+/**
+  @brief проверка в строке содержания другой строки
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
+  @return int
+ */
 int h_StrContains(const char *haystack, const char *needle)
 {
 	char *pos = (char*)h_StrStr(haystack, needle);
@@ -473,10 +490,12 @@ int h_StrContains(const char *haystack, const char *needle)
 	else
 		return 0;
 }
-
-/*
-	Removes last character from string
-*/
+/**
+  @brief удаление последнего символа в строке
+  @param string  указатель на строку в которой осуществляется поиск.
+  @param to_trim символ.
+  @return char*
+ */
 char* h_TrimEnd(char *string, char to_trim)
 {
 	char last_char = string[h_StrLen(string) -1];
@@ -491,17 +510,26 @@ char* h_TrimEnd(char *string, char to_trim)
 		return string;
 	}
 }
-
-/*
-	Concecates two strings, a wrapper for strcat from string.h, handles the resizing and copying
+/**
+  @brief объединение двух строк обертка strcat. Создается новый буфер (нужен h_free после использования)
+  @param a   Указатель на строку.
+  @param b   Указатель на строку.
+  @return char*   Указатель на новую строку.
 */
-char* h_StrCatPtr(char *a, char *b)
+char* h_StrCatNewBuf(char *a, char *b)
 {
 	char *target = (char*)h_malloc(h_StrLen(a) + h_StrLen(b) + 1);
 	h_StrCpy(target, a);
 	h_StrCat(target, b);
 	return target;
 }
+/**
+  @brief поиск и замена символов в строке.
+  @param search   Указатель на строку, которую ищем.
+  @param replace   Указатель на строку, на что меняем.
+  @param subject   Указатель на строку, в которой производим манипуляции.
+  @return char*   Указатель на новую строку.
+*/
 char* h_StrReplace(char *search , char *replace , char *subject)
 {
 	char  *p = NULL , *old = NULL , *new_subject = NULL ;
@@ -524,9 +552,11 @@ char* h_StrReplace(char *search , char *replace , char *subject)
 	h_StrCpy(new_subject + h_StrLen(new_subject) , old);
 	return new_subject;
 }
-
-/*
-	Get's all characters until '*until' has been found
+/**
+  @brief удаление всех символов до символов '*until' в строке.
+  @param haystack Указатель на подстроку, которую хотим удалить в строке.
+  @param until    Указатель на строку, до которой происходит удаление.
+  @return char*   Указатель на новую строку.
 */
 char* h_GetUntil(char *haystack, char *until)
 {
