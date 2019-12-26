@@ -269,7 +269,18 @@ char* h_StrChr(const char *str, int ch)
             return (char*)(str + i);
     return (char*)NULL;
 }
-
+/**
+  @brief сравнение двух строк (strcmp).
+  @param string1  указатель на строку.
+  @param string2  указатель на строку.
+  @return int    0 – если сравниваемее строки идентичны..
+ */
+int h_StrCmp(const char *string1, const char *string2)
+{
+    while (*string1 && *string2 && *string1 == *string2 )
+        ++string1, ++string2;
+    return *string1 - *string2;
+}
 /*
 	Gets the offset of one string in another string
 */

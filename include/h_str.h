@@ -78,6 +78,14 @@ char* h_StrNCpy(char *dest, const char *src, unsigned int count);
   @return char*    указатель на первое вхождение в строку, либо NULL.
  */
 char* h_StrChr(const char *str, int ch);
+/**
+  @brief сравнение двух строк (strcmp).
+  @param string1  указатель на строку.
+  @param string2  указатель на строку.
+  @return int    0 – если сравниваемее строки идентичны..
+ */
+int h_StrCmp(const char *string1, const char *string2);
+
 
 
 int h_StrIndexOf(const char *a, char *b);
