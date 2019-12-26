@@ -121,9 +121,21 @@ char*  h_StrUpr(char* str);
   @return int
  */
 int h_AtoI(char* str);
+/**
+  @brief  проверяет параметр с, является ли он символом пробела
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_isspace(int c);
+/**
+  @brief  преобразование из строки в long (atol).
+  @param  str  указатель на строку.
+  @return long int
+ */
+long int h_AtoL(char *string);
+
 /*
  *
-ATOI
 LTOA
 ATOL
  */

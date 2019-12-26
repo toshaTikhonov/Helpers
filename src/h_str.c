@@ -339,6 +339,53 @@ int h_AtoI(char* str)
         res = res * 10 + str[i] - '0';
     return res;
 }
+/**
+  @brief  проверяет параметр с, является ли он символом пробела
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_isspace(int c)
+{
+    return (c == '\t' || c == '\n' ||
+            c == '\v' || c == '\f' || c == '\r' || c == ' ' ? 1 : 0);
+}
+/**
+  @brief  преобразование из строки в long (atol).
+  @param  str  указатель на строку.
+  @return long int
+ */
+long int h_AtoL(char *string)
+{
+    long int result = 0;
+    unsigned int digit;
+    int sign;
+
+    while (h_isspace(*string)) {
+        string += 1;
+    }
+    if (*string == '-') {
+        sign = 1;
+        string += 1;
+    } else {
+        sign = 0;
+        if (*string == '+') {
+            string += 1;
+        }
+    }
+
+    for ( ; ; string += 1) {
+        digit = *string - '0';
+        if (digit > 9) {
+            break;
+        }
+        result = (10*result) + digit;
+    }
+
+    if (sign) {
+        return -result;
+    }
+    return result;
+}
 /*
 	Gets the offset of one string in another string
 */

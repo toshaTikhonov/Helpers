@@ -108,6 +108,11 @@ START_TEST(test_h_AtoI)
     ck_assert_int_eq(h_AtoI("123"), 123);
 }
 END_TEST
+START_TEST(test_h_AtoL)
+{
+    ck_assert_int_eq(h_AtoL("12345678"), 12345678);
+}
+END_TEST
 
 
 static Suite *helpers_suite(void)
@@ -128,6 +133,7 @@ static Suite *helpers_suite(void)
   tcase_add_test(tc_core, test_h_StrLwr_h_StrUpr);
   tcase_add_test(tc_core, test_h_StrChr);
   tcase_add_test(tc_core, test_h_AtoI);
+  tcase_add_test(tc_core, test_h_AtoL);
   tcase_set_timeout(tc_core, 30);
   suite_add_tcase(s, tc_core);
 
