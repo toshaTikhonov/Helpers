@@ -216,7 +216,7 @@ char* h_StrDup(const char *string)
   @param n        количество символов, которые надо скопировать.
   @return char*   новая строка n символов
 */
-char *h_StrnDup(const char *string, unsigned int n)
+char *h_StrNDup(const char *string, unsigned int n)
 {
     unsigned int len = n + 1;
     if(len - 1 > h_StrLen(string))
@@ -235,7 +235,7 @@ char* h_StrCpy(char *dst, const char *src)
         *d++ = *src++;
     return dst;
 }
-char* h_StrnCpy(char *dest, const char *src, unsigned int count)
+char* h_StrNCpy(char *dest, const char *src, unsigned int count)
 {
     char *tmp = dest;
 
@@ -322,7 +322,7 @@ char* h_StrReplace(char *search , char *replace , char *subject)
 	old = subject;	
 	for(p = h_StrStr(subject , search) ; p != NULL ; p = h_StrStr(p + search_size , search))
 	{
-		h_StrnCpy(new_subject + h_StrLen(new_subject) , old , p - old);
+        h_StrNCpy(new_subject + h_StrLen(new_subject), old, p - old);
 		h_StrCpy(new_subject + h_StrLen(new_subject) , replace);
 		old = p + search_size;
 	}
@@ -336,5 +336,5 @@ char* h_StrReplace(char *search , char *replace , char *subject)
 char* h_GetUntil(char *haystack, char *until)
 {
 	int offset = h_StrIndexOf(haystack, until);
-	return h_StrnDup(haystack, offset);
+	return h_StrNDup(haystack, offset);
 }

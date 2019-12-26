@@ -53,7 +53,7 @@ END_TEST
 START_TEST(test_h_StrnDup)
 {
     char* result, *test = "test";
-    ck_assert_ptr_ne(result=h_StrnDup("test12345",4),NULL);
+    ck_assert_ptr_ne(result= h_StrNDup("test12345", 4), NULL);
     ck_assert_str_eq(result,test);
     h_free(result);
 }
