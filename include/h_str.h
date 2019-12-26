@@ -134,6 +134,12 @@ int h_IsSpace(int c);
  */
 int h_IsDigit( unsigned char c);
 /**
+  @brief  проверяет параметр с, является ли он символом
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_IsAlpha(int c);
+/**
   @brief  преобразование из строки в long (atol).
   @param  str  указатель на строку.
   @return long int

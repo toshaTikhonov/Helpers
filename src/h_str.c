@@ -362,6 +362,16 @@ int h_IsDigit( unsigned char c)
     return 0;
 }
 /**
+  @brief  проверяет параметр с, является ли он символом
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_IsAlpha(int c)
+{
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ? 1 : 0);
+}
+
+/**
   @brief  преобразование из строки в long (atol).
   @param  str  указатель на строку.
   @return long int
