@@ -119,6 +119,32 @@ START_TEST(test_h_LtoA)
     ck_assert_str_eq(message, "58F");
 }
 END_TEST
+START_TEST(test_h_StrReplase)
+{
+    char *ptr;
+    h_StrCpy(message,"aaa;bbb;ccc");
+    ck_assert_ptr_ne(ptr = h_StrReplace(";","",message),NULL);
+    ck_assert_str_eq(ptr, "aaabbbccc");
+    h_free(ptr);
+}
+END_TEST
+START_TEST(test_h_StrCatNewBuf)
+{
+    char *ptr;
+    h_StrCpy(message,"aaa");
+    ck_assert_ptr_ne(ptr = h_StrCatNewBuf(message,"bbb"),NULL);
+    ck_assert_str_eq(ptr, "aaabbb");
+    h_free(ptr);
+}
+END_TEST
+START_TEST(test_h_GetUntil)
+{
+    char *ptr;
+    ck_assert_ptr_ne(ptr = h_GetUntil("aaa;bbb",";"),NULL);
+    ck_assert_str_eq(ptr, "aaa");
+    h_free(ptr);
+}
+END_TEST
 
 
 static Suite *helpers_suite(void)
@@ -141,6 +167,9 @@ static Suite *helpers_suite(void)
   tcase_add_test(tc_core, test_h_AtoI);
   tcase_add_test(tc_core, test_h_AtoL);
   tcase_add_test(tc_core, test_h_LtoA);
+  tcase_add_test(tc_core, test_h_StrReplase);
+  tcase_add_test(tc_core, test_h_StrCatNewBuf);
+  tcase_add_test(tc_core, test_h_GetUntil);
   tcase_set_timeout(tc_core, 30);
   suite_add_tcase(s, tc_core);
 
