@@ -281,6 +281,32 @@ int h_StrCmp(const char *string1, const char *string2)
         ++string1, ++string2;
     return *string1 - *string2;
 }
+/**
+  @brief  приведение символов в строке к нижнему регистру (strLwr).
+  @param  str  указатель на строку.
+  @return char*    указатель строку.
+ */
+char*  h_StrLwr(char* str)
+{
+    char* p;
+    for (p = str; *p != 0; p++)
+        if (*p >= 'A' && *p <= 'Z')
+            *p += 'a' - 'A';
+    return str;
+}
+/**
+  @brief  приведение символов в строке к верхнему регистру (strupr).
+  @param  str  указатель на строку.
+  @return char*    указатель строку.
+ */
+char*  h_StrUpr(char* str)
+{
+    char* p;
+    for (p = str; *p != 0; p++)
+        if (*p >= 'a' && *p <= 'z')
+            *p -= 'a' - 'A';
+    return str;
+}
 /*
 	Gets the offset of one string in another string
 */

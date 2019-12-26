@@ -85,8 +85,24 @@ char* h_StrChr(const char *str, int ch);
   @return int    0 – если сравниваемее строки идентичны..
  */
 int h_StrCmp(const char *string1, const char *string2);
-
-
+/**
+  @brief  приведение символов в строке к нижнему регистру (strLwr).
+  @param  str  указатель на строку.
+  @return char*    указатель строку.
+ */
+char*  h_StrLwr(char* str);
+/**
+  @brief  приведение символов в строке к верхнему регистру (strupr).
+  @param  str  указатель на строку.
+  @return char*    указатель строку.
+ */
+char*  h_StrUpr(char* str);
+/*
+ *
+ATOI
+LTOA
+ATOL
+ */
 
 int h_StrIndexOf(const char *a, char *b);
 int h_StrContains(const char *haystack, const char *needle);
