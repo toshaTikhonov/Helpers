@@ -88,3 +88,10 @@ int h_MemCmp(const void *str1, const void *str2, size_t count)
     }
     return 0;
 }
+void* h_MemSet(void *dest, int val, size_t len)
+{
+    unsigned char *ptr = dest;
+    while (len-- > 0)
+       *ptr++ = val;
+    return dest;
+}
