@@ -199,7 +199,7 @@ char* h_StrCatNewBuf(char *a, char *b);
 char* h_StrReplace(char *search , char *replace , char *subject);
 /**
   @brief удаление всех символов до символов '*until' в строке.
-  @param haystack Указатель на подстроку, которую хотим удалить в строке.
+  @param haystack Указатель на строку исходную.
   @param until    Указатель на строку, до которой происходит удаление.
   @return char*   Указатель на новую строку.
 */
