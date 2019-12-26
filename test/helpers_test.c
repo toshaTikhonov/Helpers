@@ -58,8 +58,54 @@ START_TEST(test_h_StrnDup)
     h_free(result);
 }
 END_TEST
+START_TEST(test_h_StrCpy)
+{
+    char* result, *test = "test";
+    ck_assert_ptr_ne(result = h_StrCpy(message, test), NULL);
+    ck_assert_str_eq(result,test);
+}
+END_TEST
+START_TEST(test_h_StrNCpy)
+{
+    char* result, *test = "test";
+    ck_assert_ptr_ne(result = h_StrNCpy(message, test,4), NULL);
+    ck_assert_str_eq(result,test);
+}
+END_TEST
+START_TEST(test_h_StrCat)
+{
+    char* result, *test = "test";
+    message[0]='\0';
+    ck_assert_ptr_ne(result = h_StrCat(message, test), NULL);
+    ck_assert_str_eq(result,test);
+}
+END_TEST
+START_TEST(test_h_StrCmp)
+{
+    char* test = "test";
+    h_StrCpy(message,"test");
+    ck_assert_int_eq(h_StrCmp(message, test), 0);
+}
+END_TEST
+START_TEST(test_h_StrLwr_h_StrUpr)
+{
+    char* result,*test = "test";
+    h_StrCpy(message,test);
+    ck_assert_ptr_ne(result = h_StrUpr(message), NULL);
+    ck_assert_ptr_ne(result = h_StrLwr(message), NULL);
+    ck_assert_str_eq(message,test);
+}
+END_TEST
+START_TEST(test_h_StrChr)
+{
+    char* result, *test = "test";
+    ck_assert_ptr_ne(result=h_StrChr("is a test", 't'),NULL);
+    ck_assert_str_eq(result,test);
+}
+END_TEST
 
-static Suite *helpers_lggr_suite(void)
+
+static Suite *helpers_suite(void)
 {
   Suite *s;
   TCase *tc_core;
@@ -70,6 +116,12 @@ static Suite *helpers_lggr_suite(void)
   tcase_add_test(tc_core, test_h_StrStr);
   tcase_add_test(tc_core, test_h_StrDup);
   tcase_add_test(tc_core, test_h_StrnDup);
+  tcase_add_test(tc_core, test_h_StrCpy);
+  tcase_add_test(tc_core, test_h_StrNCpy);
+  tcase_add_test(tc_core, test_h_StrCat);
+  tcase_add_test(tc_core, test_h_StrCmp);
+  tcase_add_test(tc_core, test_h_StrLwr_h_StrUpr);
+  tcase_add_test(tc_core, test_h_StrChr);
   tcase_set_timeout(tc_core, 30);
   suite_add_tcase(s, tc_core);
 
@@ -82,7 +134,7 @@ int main(int argc, char *argv[])
   Suite *s;
   SRunner *sr;
 
-  s = helpers_lggr_suite();
+  s = helpers_suite();
   sr = srunner_create(s);
 
   srunner_run_all(sr, CK_VERBOSE);
