@@ -22,6 +22,7 @@ void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t fr
 void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn);
 void*  h_MemCpy(void* dst, const void* src, size_t size);
 void* h_MemMove(void *dest, const void *src, size_t len);
+int h_MemCmp(const void *str1, const void *str2, size_t count);
 
 #ifdef __cplusplus
 }
