@@ -67,9 +67,27 @@ char* h_StrDup(const char *string);
   @return char*   новая строка n символов
 */
 char* h_StrNDup(const char *string, unsigned int n);
-
+/**
+  @brief копирование строки (аналог strcpy).
+  @param dst   Указатель на строку, куда копируем.
+  @param src   Указатель на строку, откуда копируем.
+  @return char*   Указатель на строку, куда копируем.
+*/
 char* h_StrCpy(char *dst, const char *src);
+/**
+  @brief добавить к строке строку (аналог strcat).
+  @param dst   Указатель на строку, куда добавляем.
+  @param src   Указатель на строку, откуда добавляем.
+  @return char*   Указатель на строку, куда добавили.
+*/
 char* h_StrCat(char *dst, const char *src);
+/**
+  @brief копирование строки count символов (аналог strncpy).
+  @param dst   Указатель на строку, куда копируем.
+  @param src   Указатель на строку, откуда копируем.
+  @param count количество символов.
+  @return char*   Указатель на строку, куда копируем.
+*/
 char* h_StrNCpy(char *dest, const char *src, unsigned int count);
 /**
   @brief возвращает указатель на первое вхождение в строку символа.
