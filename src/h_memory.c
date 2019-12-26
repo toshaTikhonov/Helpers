@@ -61,6 +61,8 @@ void*  h_MemCpy(void* dst, const void* src, size_t size) {
 }
 void* h_MemMove(void *dest, const void *src, size_t len)
 {
+    char *lasts;
+    char *lastd;
     char *d = dest;
 	const char *s = src;
 	if (d < s)
@@ -68,8 +70,8 @@ void* h_MemMove(void *dest, const void *src, size_t len)
 	      *d++ = *s++;
 	else
 	{
-	    char *lasts = s + (len-1);
-	    char *lastd = d + (len-1);
+	    lasts = (char*)s + (len-1);
+	    lastd = d + (len-1);
 	    while (len--)
 	      *lastd-- = *lasts--;
 	}
