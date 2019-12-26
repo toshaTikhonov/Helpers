@@ -344,10 +344,22 @@ int h_AtoI(char* str)
   @param  c  проверяемый символ.
   @return int
  */
-int h_isspace(int c)
+int h_IsSpace(int c)
 {
     return (c == '\t' || c == '\n' ||
             c == '\v' || c == '\f' || c == '\r' || c == ' ' ? 1 : 0);
+}
+/**
+  @brief  проверяет параметр с, является ли он десятичным числом
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_IsDigit( unsigned char c)
+{
+    if ( c >= '0' && c <= '9' )
+        return 1;
+
+    return 0;
 }
 /**
   @brief  преобразование из строки в long (atol).
@@ -360,7 +372,7 @@ long int h_AtoL(char *string)
     unsigned int digit;
     int sign;
 
-    while (h_isspace(*string)) {
+    while (h_IsSpace(*string)) {
         string += 1;
     }
     if (*string == '-') {

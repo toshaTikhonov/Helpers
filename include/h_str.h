@@ -126,7 +126,13 @@ int h_AtoI(char* str);
   @param  c  проверяемый символ.
   @return int
  */
-int h_isspace(int c);
+int h_IsSpace(int c);
+/**
+  @brief  проверяет параметр с, является ли он десятичным числом
+  @param  c  проверяемый символ.
+  @return int
+ */
+int h_IsDigit( unsigned char c);
 /**
   @brief  преобразование из строки в long (atol).
   @param  str  указатель на строку.
