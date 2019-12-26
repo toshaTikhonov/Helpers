@@ -256,7 +256,19 @@ char* h_StrCat(char *dst, const char *src)
         *d++ = *src++;
     return dst;
 }
-
+/**
+  @brief возвращает указатель на первое вхождение в строку символа.
+  @param str  указатель на строку в которой осуществляется поиск.
+  @param ch   символ, который ищется.
+  @return char*    указатель на первое вхождение в строку, либо NULL.
+ */
+char* h_StrChr(const char *str, int ch)
+{
+    for(int i = 0; str[i] != 0; i++)
+        if(str[i] == ch)
+            return (char*)(str + i);
+    return (char*)NULL;
+}
 
 /*
 	Gets the offset of one string in another string

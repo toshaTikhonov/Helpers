@@ -71,6 +71,14 @@ char* h_StrNDup(const char *string, unsigned int n);
 char* h_StrCpy(char *dst, const char *src);
 char* h_StrCat(char *dst, const char *src);
 char* h_StrNCpy(char *dest, const char *src, unsigned int count);
+/**
+  @brief возвращает указатель на первое вхождение в строку символа.
+  @param str  указатель на строку в которой осуществляется поиск.
+  @param ch   символ, который ищется.
+  @return char*    указатель на первое вхождение в строку, либо NULL.
+ */
+char* h_StrChr(const char *str, int ch);
+
 
 int h_StrIndexOf(const char *a, char *b);
 int h_StrContains(const char *haystack, const char *needle);
