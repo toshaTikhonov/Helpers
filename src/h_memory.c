@@ -3,10 +3,15 @@
 
 
 /* memory function pointers */
+#ifdef STATIC_MEMORY_POOL
 static h_malloc_t do_malloc = h_mem_malloc;
 static h_realloc_t do_realloc = h_mem_realloc;
 static h_free_t do_free = h_mem_free;
-
+#else
+static h_malloc_t do_malloc = malloc;
+static h_realloc_t do_realloc = realloc;
+static h_free_t do_free = free;
+#endif
 void * h_malloc(size_t size)
 {
   if (!size)

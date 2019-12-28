@@ -9,6 +9,7 @@ if (NOT MSVC)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 endif()
 
+
 # library info
 
 set(PROJECT_DESCRIPTION "Helpers library for C applications")
@@ -42,6 +43,11 @@ endif ()
 
 if (_GNU_SOURCE)
     add_definitions(-D_GNU_SOURCE)
+endif ()
+
+option(MEMORY_POOL_STATIC "Static pool memory." OFF)
+if (MEMORY_POOL_STATIC)
+    add_definitions(-DSTATIC_MEMORY_POOL)
 endif ()
 
 # directories and source
