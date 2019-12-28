@@ -1,53 +1,55 @@
+#include "h_memmgr.h"
 #include "h_memory.h"
 
+
 /* memory function pointers */
-static h_malloc_t do_malloc = malloc;
-static h_realloc_t do_realloc = realloc;
-static h_free_t do_free = free;
+static h_malloc_t do_malloc = h_mem_malloc;
+static h_realloc_t do_realloc = h_mem_realloc;
+static h_free_t do_free = h_mem_free;
 
-void * h_malloc(size_t size) {
-  if (!size) {
+void * h_malloc(size_t size)
+{
+  if (!size)
     return NULL;
-  } else {
+  else
     return (*do_malloc)(size);
-  }
 }
 
-void * h_realloc(void * ptr, size_t size) {
-  if (!size) {
+void * h_realloc(void * ptr, size_t size)
+{
+  if (!size)
     return NULL;
-  } else {
+  else
     return (*do_realloc)(ptr, size);
-  }
 }
 
-void h_free(void * ptr) {
-  if (ptr == NULL) {
+void h_free(void * ptr)
+{
+  if (ptr == NULL)
     return;
-  } else {
+  else
     (*do_free)(ptr);
-  }
 }
 
-void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t free_fn) {
+void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t free_fn)
+{
   do_malloc = malloc_fn;
   do_realloc = realloc_fn;
   do_free = free_fn;
 }
 
-void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn) {
-  if (malloc_fn) {
+void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn)
+{
+  if (malloc_fn)
     *malloc_fn = do_malloc;
-  }
-  if (realloc_fn) {
+  if (realloc_fn)
     *realloc_fn = do_realloc;
-  }
-  if (free_fn) {
+  if (free_fn)
     *free_fn = do_free;
-  }
 }
 
-void*  h_MemCpy(void* dst, const void* src, size_t size) {
+void*  h_MemCpy(void* dst, const void* src, size_t size)
+{
     void* tmp           = dst;
     unsigned char* _src = (unsigned char*) src;
     unsigned char* _dst = (unsigned char*) dst;

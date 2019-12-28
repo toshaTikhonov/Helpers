@@ -10,6 +10,7 @@
 #include "h_lggr.h"
 #include "h_str.h"
 #include "h_memory.h"
+#include "h_memmgr.h"
 
 char message[1024];
 
@@ -149,6 +150,15 @@ START_TEST(test_h_GetUntil)
     h_free(ptr);
 }
 END_TEST
+START_TEST(test_h_memmngr)
+{
+    h_mem_init();
+    unsigned char* ptr = h_malloc(7*1024);
+    ck_assert_ptr_ne(ptr,NULL);
+    h_MemSet(ptr,0xFF,7*1024);
+    h_free(ptr);
+}
+END_TEST
 
 
 static Suite *helpers_suite(void)
@@ -174,6 +184,7 @@ static Suite *helpers_suite(void)
   tcase_add_test(tc_core, test_h_StrReplase);
   tcase_add_test(tc_core, test_h_StrCatNewBuf);
   tcase_add_test(tc_core, test_h_GetUntil);
+  tcase_add_test(tc_core, test_h_memmngr);
   tcase_set_timeout(tc_core, 30);
   suite_add_tcase(s, tc_core);
 
