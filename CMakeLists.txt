@@ -105,6 +105,28 @@ configure_file(${INC_DIR}/helpers-cfg.h.in ${PROJECT_BINARY_DIR}/helpers-cfg.h)
 set (CMAKE_EXTRA_INCLUDE_FILES ${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 
+# documentation
+
+option(BUILD_HELPERS_DOCUMENTATION "Build the documentation." OFF)
+if (BUILD_HELPERS_DOCUMENTATION)
+    find_package(Doxygen)
+    if (DOXYGEN_FOUND)
+        set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen.cfg)
+        set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/doxyfile)
+
+        configure_file(${doxyfile_in} ${doxyfile} @ONLY)
+
+        add_custom_target(doc
+                COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile_in}
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                COMMENT "Generating documentation with Doxygen"
+                VERBATIM)
+
+    else ()
+        message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+    endif ()
+endif ()
+
 # tests
 
 option(BUILD_HELPERS_TESTING "Build the testing tree." OFF) # because we don not use include(CTest)
@@ -220,17 +242,16 @@ set(CPACK_PACKAGE_VERSION_PATCH ${LIBRARY_VERSION_PATCH})
 
 option(BUILD_RPM "Build a RPM for your system" OFF)
 if (BUILD_RPM)
-  set(CPACK_GENERATOR "TGZ;DEB;RPM")
+  set(CPACK_GENERATOR "TGZ")
   set(CPACK_RPM_PACKAGE_LICENSE "LGPL")
   set(CPACK_RPM_PACKAGE_URL "https://armshine.net:3000/tosha/Helpers/")
 endif ()
 
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "support@armshine.net")
 
-#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4)")
-if (INSTALL_HEADER)
-endif ()
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4)")
 
+set(CPACK_PACKAGE_FILE_NAME ${PACKAGE_FILE_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${PACKAGE_FILE_NAME})
 
 set(CPACK_SOURCE_GENERATOR "TGZ")
@@ -245,4 +266,5 @@ add_custom_target(dist_y
 message(STATUS "Build static library: ${BUILD_STATIC}")
 message(STATUS "Build testing tree: ${BUILD_HELPERS_TESTING}")
 message(STATUS "Install the header files: ${INSTALL_HEADER}")
-message(STATUS "Build RPM package: ${BUILD_RPM}") 
+message(STATUS "Build RPM package: ${BUILD_RPM}")
+message(STATUS "Build documentation: ${BUILD_HELPERS_DOCUMENTATION}")
