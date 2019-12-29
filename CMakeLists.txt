@@ -222,12 +222,12 @@ option(BUILD_RPM "Build a RPM for your system" OFF)
 if (BUILD_RPM)
   set(CPACK_GENERATOR "TGZ;DEB;RPM")
   set(CPACK_RPM_PACKAGE_LICENSE "LGPL")
-  set(CPACK_RPM_PACKAGE_URL "http://babelouest.github.io/yder/")
+  set(CPACK_RPM_PACKAGE_URL "https://armshine.net:3000/tosha/Helpers/")
 endif ()
 
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "support@armshine.net")
 
-#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4), liborcania (>= ${ORCANIA_VERSION_REQUIRED})")
+#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.4)")
 if (INSTALL_HEADER)
 endif ()
 
