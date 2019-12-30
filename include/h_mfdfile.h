@@ -50,6 +50,7 @@ typedef struct {
 
 #pragma pack()
 
+int mfdread(char* file_name, h_mf_classic_tag mt_dump);
 
 #ifdef __cplusplus
 }
