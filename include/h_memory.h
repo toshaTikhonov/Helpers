@@ -18,7 +18,7 @@ extern "C" {
 #undef realloc
 #undef free
 
-/* указатели на функции, работающие с памятью */
+/** указатели на функции, работающие с памятью */
 typedef void *(*h_malloc_t)(size_t);
 typedef void *(*h_realloc_t)(void *, size_t);
 typedef void (*h_free_t)(void *);
