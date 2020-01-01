@@ -69,7 +69,7 @@ void*  h_MemCpy(void* dst, const void* src, size_t size);
   @brief перенос буфера памяти (аналог memmove).
   @param dest    указатель на буфер памяти , куда.
   @param src    указатель на буфер памяти , откуда.
-  @param size   размер .
+  @param len   размер .
   @return void*   Указатель dest.
 */
 void* h_MemMove(void *dest, const void *src, size_t len);

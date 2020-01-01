@@ -19,8 +19,6 @@ extern "C" {
 #define MIN_POOL_ALLOC_QUANTAS 16
 /**
   @brief инициализация пула.
-  @param void  .
-  @return void .
 */
 void h_mem_init(void);
 /**

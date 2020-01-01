@@ -70,8 +70,6 @@ static mem_header_t* get_mem_from_pool(unsigned int quantas)
 }
 /**
   @brief инициализация пула.
-  @param void  .
-  @return void .
 */
 void h_mem_init(void)
 {

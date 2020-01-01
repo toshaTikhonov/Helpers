@@ -28,13 +28,11 @@ void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned i
 void h_lggr_printf_line(const char *pszFmt, ...);
 /**
   @brief смещение логирования по строке вправо.
-  @param void.
   @return void.
 */
 void h_lggr_inc_level( void );
 /**
   @brief смещение логирования по строке влево.
-  @param void.
   @return void.
 */
 void h_lggr_dec_level( void );
