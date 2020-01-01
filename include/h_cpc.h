@@ -54,6 +54,13 @@ unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char
     @retval void.
 */
 void h_cp1251_to_utf8(const char *p_str_src, char *p_str_dst);
+/**
+    @brief  Преобразование строки из кодовой таблицы utf8 to Win1251.
+    @param[in]  p_str_src   исходные данные.
+    @param[out] p_str_dst   буфер, куда помещается результат (может совпадать с исходным).
+    @return 0 успешно , -1 не успешно.
+*/
+int h_utf8_to_cp1251(const char* p_str_src, char* p_str_dst, unsigned int n);
 
 /**
  * @}
