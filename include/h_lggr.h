@@ -6,7 +6,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 /**
-* @defgroup h_lggr функции
+* @defgroup h_lggr функции для логирования
 * эти функции нужны для реализации логирования
 * @{
 */
