@@ -5,15 +5,27 @@
 #include "h_memory.h"
 #include "h_str.h"
 
+/* реализует вложенность лога */
 static int log_level = 0;
 
 
+/**
+  @brief получение времени длялогирования.
+  @param  void.
+  @return unsigned int время в мсек.
+*/
 static unsigned int h_get_time(void)
 {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return (unsigned int) ts.tv_sec * 1000 + ts.tv_nsec / 1000 / 1000;
 }
+/**
+  @brief вывод в stdout логирования.
+  @param pszFmt       Указатель формат выводимых данных.
+  @param valist       список данных.
+  @return void.
+*/
 static void h_lggr_print_log( const char* pszFmt, va_list* valist )
 {
     char buf[256];
@@ -29,11 +41,23 @@ static void h_lggr_print_log( const char* pszFmt, va_list* valist )
     }
     fflush(output);
 }
+/**
+  @brief вывод времени логирования буфер.
+  @param buffer     Указатель данные времени.
+  @param size       размер буфера.
+  @return void.
+*/
 static void h_lggr_generate_time(char* buffer, unsigned int size)
 {
     unsigned int tickcount = h_get_time();
     snprintf(buffer,size,"[%d:%d]",tickcount / 1000, tickcount % 1000);
 }
+/**
+  @brief логирование строки.
+  @param pszFmt       Указатель формат выводимых данных.
+  @param ...          форматные данные.
+  @return void.
+*/
 void h_lggr_printf_line(const char *pszFmt, ...)
 {
   char Buffer[32];
@@ -56,6 +80,13 @@ void h_lggr_printf_line(const char *pszFmt, ...)
   va_end(args);
   va_end(lists);
 }
+/**
+  @brief логирование бинарных данных определенного размера.
+  @param psz_title    Указатель на заголовок.
+  @param p_p_data     Указатель на входные данные.
+  @param lsize        Длина исходных данных.
+  @return void.
+*/
 void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned int lsize)
 {
     char buff[34];
@@ -76,10 +107,20 @@ void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned i
         }
     }
 }
+/**
+  @brief смещение логирования по строке вправо.
+  @param void.
+  @return void.
+*/
 void h_lggr_inc_level( void )
 {
     ++log_level;
 }
+/**
+  @brief смещение логирования по строке влево.
+  @param void.
+  @return void.
+*/
 void h_lggr_dec_level( void )
 {
     --log_level;

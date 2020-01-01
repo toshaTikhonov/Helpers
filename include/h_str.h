@@ -5,6 +5,12 @@
 extern "C" {
 #endif /* __cplusplus */
 
+/**
+* @defgroup h_str функции
+* эти функции нужны для реализации преобразований со строками
+* @{
+*/
+
 #ifndef NULL
 #define NULL 0
 #endif
@@ -28,7 +34,7 @@ void h_BcdToStr(const char *pdata, unsigned int data_length, char *string);
 /**
   @brief Преобразовать строку в последовательность бинарных данных.
   @param string            Указатель на исходные данные (строка).
-  @param pdata             Указатель на выходные данные.
+  @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
   @return void.
 */
@@ -36,7 +42,7 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length);
 /**
   @brief Преобразовать строку в последовательность данных формата BCD.
   @param string            Указатель на исходные данные (строка).
-  @param pdata             Указатель на выходные данные.
+  @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
   @return void.
 */
@@ -83,7 +89,7 @@ char* h_StrCpy(char *dst, const char *src);
 char* h_StrCat(char *dst, const char *src);
 /**
   @brief копирование строки count символов (аналог strncpy).
-  @param dst   Указатель на строку, куда копируем.
+  @param dest   Указатель на строку, куда копируем.
   @param src   Указатель на строку, откуда копируем.
   @param count количество символов.
   @return char*   Указатель на строку, куда копируем.
@@ -141,7 +147,7 @@ int h_IsDigit( unsigned char c);
 int h_IsAlpha(int c);
 /**
   @brief  преобразование из строки в long (atol).
-  @param  str  указатель на строку.
+  @param  string  указатель на строку.
   @return long int
  */
 long int h_AtoL(char *string);
@@ -163,11 +169,11 @@ void h_UltoA(unsigned long value, char* string, int radix);
 void h_LtoA(long value, char* string, int radix);
 /**
   @brief  возвращается смещение строки в другой строке
-  @param  a  указатель на строку.
-  @param  b  указатель на подстроку.
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
   @return int
  */
-int h_StrIndexOf(const char *a, char *b);
+int h_StrIndexOf(const char *haystack, char *needle);
 /**
   @brief проверка в строке содержания другой строки
   @param haystack  указатель на строку в которой осуществляется поиск.
@@ -204,6 +210,10 @@ char* h_StrReplace(char *search , char *replace , char *subject);
   @return char*   Указатель на новую строку.
 */
 char* h_GetUntil(char *haystack, char *until);
+
+/**
+ * @}
+ */
 
 #ifdef __cplusplus
 }

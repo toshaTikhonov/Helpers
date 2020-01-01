@@ -116,7 +116,7 @@ char * h_cp_1251_to_866_str (char *p_str_src, char *p_str_dst)
     @brief  Преобразование строки из кодовой таблицы 866 в таблицу 1251
     @param  p_str_src - исходные данные
     @param  p_str_dst   - буфер, куда помещается результат
-    @retval p_str_dst
+    @retval указатель на p_str_dst
 */
 char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst)
 {
@@ -143,7 +143,7 @@ char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst)
     @param  p_buf_src - исходные данные.
     @param  p_len     - длина исходных данных.
     @param  p_buf_dest   - буфер, куда помещается результат (может совпадать с исходным).
-    @retval p_buf_dest.
+    @retval указатель на p_buf_dest.
 */
 unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char p_len, unsigned char *p_buf_dest)
 {
@@ -175,7 +175,7 @@ unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char
 /**
     @brief  Преобразование строки из кодовой таблицы Win1251 to utf8.
     @param  p_str_src - исходные данные.
-    @param  p_str_dest   - буфер, куда помещается результат (может совпадать с исходным).
+    @param  p_str_dst   - буфер, куда помещается результат (может совпадать с исходным).
     @retval void.
 */
 void h_cp1251_to_utf8(const char *p_str_src, char *p_str_dst)

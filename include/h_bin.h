@@ -4,6 +4,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+/**
+* @defgroup h_bin функции
+* эти функции нужны для реализации преобразований из в бинарные данные
+* @{
+*/
 
 /**
   @brief преобразование бинарных данных в формате big-endian в четырех байтовое целое
@@ -20,6 +25,9 @@ unsigned int  h_BigEndianToUINT( unsigned char* p_buf );
 */
 void h_UINTToBigEndian(unsigned char *p_buf_dst, unsigned int p_buf_src );
 
+/**
+ * @}
+ */
 
 
 #ifdef __cplusplus

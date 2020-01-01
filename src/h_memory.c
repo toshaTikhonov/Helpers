@@ -2,8 +2,8 @@
 #include "h_memory.h"
 
 
-/* memory function pointers */
-#ifdef STATIC_MEMORY_POOL
+/* указатели на функции, работающие с памятью */
+#ifdef STATIC_MEMORY_POOL /* статический пул (нет динамической памяти)*/
 static h_malloc_t do_malloc = h_mem_malloc;
 static h_realloc_t do_realloc = h_mem_realloc;
 static h_free_t do_free = h_mem_free;
@@ -12,6 +12,12 @@ static h_malloc_t do_malloc = malloc;
 static h_realloc_t do_realloc = realloc;
 static h_free_t do_free = free;
 #endif
+
+/**
+  @brief выделение памяти (аналог malloc).
+  @param size   размер выделяемой памяти.
+  @return void*   Указатель на выделенную память.
+*/
 void * h_malloc(size_t size)
 {
   if (!size)
@@ -19,7 +25,12 @@ void * h_malloc(size_t size)
   else
     return (*do_malloc)(size);
 }
-
+/**
+  @brief расширение буфера памяти (аналог realloc).
+  @param ptr    указатель на буфер память которого нужно увеличить.
+  @param size   размер выделяемой памяти.
+  @return void*   Указатель на выделенную память.
+*/
 void * h_realloc(void * ptr, size_t size)
 {
   if (!size)
@@ -27,7 +38,11 @@ void * h_realloc(void * ptr, size_t size)
   else
     return (*do_realloc)(ptr, size);
 }
-
+/**
+  @brief освобождение буфера памяти (аналог free).
+  @param ptr    указатель на буфер памяти.
+  @return void  .
+*/
 void h_free(void * ptr)
 {
   if (ptr == NULL)
@@ -35,14 +50,26 @@ void h_free(void * ptr)
   else
     (*do_free)(ptr);
 }
-
+/**
+  @brief установка функций по работе с памятью.
+  @param malloc_fn    указатель на функцию malloc.
+  @param realloc_fn   указатель на функцию realloc.
+  @param free_fn      указатель на функцию free.
+  @return void  .
+*/
 void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t free_fn)
 {
   do_malloc = malloc_fn;
   do_realloc = realloc_fn;
   do_free = free_fn;
 }
-
+/**
+  @brief возврат функций по работе с памятью.
+  @param malloc_fn    указатель на функцию malloc.
+  @param realloc_fn   указатель на функцию realloc.
+  @param free_fn      указатель на функцию free.
+  @return void  .
+*/
 void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn)
 {
   if (malloc_fn)
@@ -52,7 +79,13 @@ void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_
   if (free_fn)
     *free_fn = do_free;
 }
-
+/**
+  @brief копирование буфера памяти (аналог memcpy).
+  @param dst    указатель на буфер памяти , куда копируем.
+  @param src    указатель на буфер памяти , откуда копируем.
+  @param size   размер .
+  @return void*   Указатель dst.
+*/
 void*  h_MemCpy(void* dst, const void* src, size_t size)
 {
     void* tmp           = dst;
@@ -66,6 +99,13 @@ void*  h_MemCpy(void* dst, const void* src, size_t size)
         *_dst++ = *_src++;
     return tmp;
 }
+/**
+  @brief перенос буфера памяти (аналог memmove).
+  @param dest    указатель на буфер памяти , куда.
+  @param src    указатель на буфер памяти , откуда.
+  @param size   размер .
+  @return void*   Указатель dest.
+*/
 void* h_MemMove(void *dest, const void *src, size_t len)
 {
     char *lasts;
@@ -84,6 +124,13 @@ void* h_MemMove(void *dest, const void *src, size_t len)
 	}
 	return dest;
 }
+/**
+  @brief сравнение двух ,буферов (memcmp).
+  @param str1  указатель на буфер 1.
+  @param str2  указатель на буфер 2.
+  @param count   размер .
+  @return int    0 – если сравниваемее массивы идентичны..
+ */
 int h_MemCmp(const void *str1, const void *str2, size_t count)
 {
     const unsigned char *s1 = str1;
@@ -95,6 +142,13 @@ int h_MemCmp(const void *str1, const void *str2, size_t count)
     }
     return 0;
 }
+/**
+  @brief заполнение буфера памяти (аналог memset).
+  @param dest    указатель на буфер памяти.
+  @param val     значение заполнения.
+  @param len   размер .
+  @return void*   Указатель dest.
+*/
 void* h_MemSet(void *dest, int val, size_t len)
 {
     unsigned char *ptr = dest;

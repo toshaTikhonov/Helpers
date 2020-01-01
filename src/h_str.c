@@ -131,7 +131,7 @@ unsigned int h_StrLen(const char* string)
 /**
   @brief Преобразовать строку в последовательность бинарных данных.
   @param string            Указатель на исходные данные (строка).
-  @param pdata             Указатель на выходные данные.
+  @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
   @return void.
 */
@@ -156,7 +156,7 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length)
 /**
   @brief Преобразовать строку в последовательность данных формата BCD.
   @param string            Указатель на исходные данные (строка).
-  @param pdata             Указатель на выходные данные.
+  @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
   @return void.
 */
@@ -244,7 +244,7 @@ char* h_StrCpy(char *dst, const char *src)
 }
 /**
   @brief копирование строки count символов (аналог strncpy).
-  @param dst   Указатель на строку, куда копируем.
+  @param dest  Указатель на строку, куда копируем.
   @param src   Указатель на строку, откуда копируем.
   @param count количество символов.
   @return char*   Указатель на строку, куда копируем.
@@ -374,7 +374,7 @@ int h_IsAlpha(int c)
 
 /**
   @brief  преобразование из строки в long (atol).
-  @param  str  указатель на строку.
+  @param  string  указатель на строку.
   @return long int
  */
 long int h_AtoL(char *string)
@@ -468,14 +468,14 @@ void h_LtoA(long value, char* string, int radix)
 }
 /**
   @brief  возвращается смещение строки в другой строке
-  @param  a  указатель на строку.
-  @param  b  указатель на строку , которая ищется.
+  @param haystack  указатель на строку в которой осуществляется поиск.
+  @param needle    что ищется.
   @return int
  */
-int h_StrIndexOf(const char *a, char *b)
+int h_StrIndexOf(const char *haystack, char *needle)
 {
-	char *offset = (char*)h_StrStr(a, b);
-	return offset - a;
+	char *offset = (char*)h_StrStr(haystack, needle);
+	return offset - haystack;
 }
 /**
   @brief проверка в строке содержания другой строки
