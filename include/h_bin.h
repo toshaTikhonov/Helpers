@@ -26,6 +26,21 @@ unsigned int  h_BigEndianToUINT( unsigned char* p_buf );
 void h_UINTToBigEndian(unsigned char *p_buf_dst, unsigned int p_buf_src );
 
 /**
+  @brief преобразование бинарных данных в формате big-endian в 2х байтовое целое
+  @param p_buf - бинарных данных в формате big-endian
+  @return 2-х байтовое целое
+*/
+unsigned short  h_BigEndianToUINT16( unsigned char* p_buf );
+
+/**
+  @brief преобразование 2-х байтового целого в бинарные данные в формате big-endian
+  @param p_buf_dst - бинарных данных в формате big-endian
+  @param p_buf_src - 2-х байтовое целое
+  @return void.
+*/
+void h_UINT16ToBigEndian(unsigned char *p_buf_dst, unsigned short p_buf_src );
+
+/**
  * @}
  */
 
