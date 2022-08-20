@@ -228,8 +228,12 @@ char * h_sprintf(const char * message, ...);
   @return char*   Указатель на новую строку.
 */
 char * h_strcatf(char * source, const char * message, ...);
-
-
+/**
+  @brief проверка на пустую строку
+  @param source - строка которую проверяют
+  @return int   true - если строка NULL или пустая.
+*/
+int h_str_null_empty(const char* source);
 /**
  * @}
  */
