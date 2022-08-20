@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "h_str.h"
 #include "h_memory.h"
 

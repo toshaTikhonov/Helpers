@@ -1,8 +1,6 @@
 #ifndef __H_STR_H__
 #define __H_STR_H__
 
-#include <stdio.h>
-#include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {
