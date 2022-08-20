@@ -1,6 +1,9 @@
 #ifndef __H_STR_H__
 #define __H_STR_H__
 
+#include <stdio.h>
+#include <stdarg.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -210,6 +213,22 @@ char* h_StrReplace(char *search , char *replace , char *subject);
   @return char*   Указатель на новую строку.
 */
 char* h_GetUntil(char *haystack, char *until);
+/**
+  @brief Реализация sprintf, которая возвращает char * со строковой конструкцией.
+         Создается новый буфер (нужен h_free после использования)
+  @param message
+  @return char*   Указатель на новую строку.
+*/
+char * h_sprintf(const char * message, ...);
+/**
+  @brief Комбинация  strcat и sprintf, которая возвращает char * со строковой конструкцией.
+         Создается новый буфер (нужен h_free после использования)
+  @param source - строка к которой добавляется результат sprintf
+  @param message
+  @return char*   Указатель на новую строку.
+*/
+char * h_strcatf(char * source, const char * message, ...);
+
 
 /**
  * @}

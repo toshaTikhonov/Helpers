@@ -564,3 +564,73 @@ char* h_GetUntil(char *haystack, char *until)
 	int offset = h_StrIndexOf(haystack, until);
 	return h_StrNDup(haystack, offset);
 }
+/**
+  @brief Реализация sprintf, которая возвращает char * со строковой конструкцией.
+         Создается новый буфер (нужен h_free после использования)
+  @param message
+  @return char*   Указатель на новую строку.
+*/
+char * h_sprintf(const char * message, ...)
+{
+  va_list argp, argp_cpy;
+  size_t out_len = 0;
+  char * out = NULL;
+  if (message != NULL) {
+    va_start(argp, message);
+    va_copy(argp_cpy, argp); // делаем копию, потому что в некоторых архитектурах vsnprintf может модифицировать argp.
+    out_len = vsnprintf(NULL, 0, message, argp);
+    out = h_malloc(out_len+sizeof(char));
+    if (out == NULL) {
+      va_end(argp);
+      va_end(argp_cpy);
+      return NULL;
+    }
+    vsnprintf(out, (out_len+sizeof(char)), message, argp_cpy);
+    va_end(argp);
+    va_end(argp_cpy);
+  }
+  return out;
+}
+/**
+  @brief Комбинация  strcat и sprintf, которая возвращает char * со строковой конструкцией.
+         Создается новый буфер (нужен h_free после использования)
+  @param source - строка к которой добавляется результат sprintf
+  @param message
+  @return char*   Указатель на новую строку.
+*/
+char * h_strcatf(char * source, const char * message, ...)
+{
+  va_list argp, argp_cpy;
+  char * out = NULL, * message_formatted = NULL;
+  size_t message_formatted_len = 0, out_len = 0, source_len = 0;
+  
+  if (message != NULL) {
+    va_start(argp, message);
+    va_copy(argp_cpy, argp); // делаем копию, потому что в некоторых архитектурах vsnprintf может модифицировать argp.
+    if (source != NULL) {
+      source_len = h_StrLen(source);
+      message_formatted_len = vsnprintf(NULL, 0, message, argp);
+      message_formatted = h_malloc(message_formatted_len+sizeof(char));
+      if (message_formatted != NULL) {
+        out = h_malloc(source_len+message_formatted_len+sizeof(char));
+        vsnprintf(message_formatted, (message_formatted_len+sizeof(char)), message, argp_cpy);
+        if (out != NULL) {
+            h_StrNCpy(out, source, source_len);
+            h_StrNCpy(out+source_len, message_formatted, message_formatted_len);
+          out[source_len+message_formatted_len] = '\0';
+        }
+        h_free(message_formatted);
+        h_free(source);
+      }
+    } else {
+      out_len = vsnprintf(NULL, 0, message, argp);
+      out = h_malloc(out_len+sizeof(char));
+      if (out != NULL) {
+        vsnprintf(out, (out_len+sizeof(char)), message, argp_cpy);
+      }
+    }
+    va_end(argp);
+    va_end(argp_cpy);
+  }
+  return out;
+}
