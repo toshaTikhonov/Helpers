@@ -13,8 +13,8 @@ endif()
 # library info
 
 set(PROJECT_DESCRIPTION "Helpers library for C applications")
-set(PROJECT_HOMEPAGE_URL "https://armshine.net:3000/tosha/Helpers/")
-set(PROJECT_BUGREPORT_PATH "https://armshine.net:3000/tosha/Helpers/issues")
+set(PROJECT_HOMEPAGE_URL "https://github.com/toshaTikhonov/Helpers.git")
+set(PROJECT_BUGREPORT_PATH "https://github.com/toshaTikhonov/Helpers/issues")
 
 set(LIBRARY_VERSION_MAJOR "0")
 set(LIBRARY_VERSION_MINOR "2")
@@ -242,7 +242,7 @@ option(BUILD_RPM "Build a RPM for your system" OFF)
 if (BUILD_RPM)
   set(CPACK_GENERATOR "TGZ")
   set(CPACK_RPM_PACKAGE_LICENSE "LGPL")
-  set(CPACK_RPM_PACKAGE_URL "https://armshine.net:3000/tosha/Helpers/")
+  set(CPACK_RPM_PACKAGE_URL "https://github.com/toshaTikhonov/Helpers/")
 endif ()
 
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "support@armshine.net")
