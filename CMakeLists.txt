@@ -87,7 +87,7 @@ if (NOT WIN32)
             SOVERSION "${LIBRARY_SOVERSION}")
 endif()
 if (WIN32)
-    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX "-${LIBRARY_VERSION_MAJOR}.dll")
+    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX "-${LIBRARY_VERSION}.dll")
 endif ()
 
 # static library
