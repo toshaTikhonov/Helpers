@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdarg.h>
+#if defined(WIN32)
 #include <windows.h>
+#endif
 #include "h_lggr.h"
 #include "h_memory.h"
 #include "h_str.h"
