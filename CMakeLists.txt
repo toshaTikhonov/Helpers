@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.20.1)
 
 set(LIBRARY_NAME "Helpers")
 
@@ -11,6 +11,7 @@ endif()
 
 if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
 # library info
@@ -87,9 +88,8 @@ if (NOT WIN32)
             SOVERSION "${LIBRARY_SOVERSION}")
 endif()
 if (WIN32)
-    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX "-${LIBRARY_VERSION}.dll")
+set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX "-${LIBRARY_VERSION}.dll")
 endif ()
-
 # static library
 
 option(BUILD_STATIC "Build static library." OFF)
