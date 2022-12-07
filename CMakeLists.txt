@@ -21,7 +21,7 @@ set(PROJECT_HOMEPAGE_URL "https://github.com/toshaTikhonov/Helpers.git")
 set(PROJECT_BUGREPORT_PATH "https://github.com/toshaTikhonov/Helpers/issues")
 
 set(LIBRARY_VERSION_MAJOR "0")
-set(LIBRARY_VERSION_MINOR "2")
+set(LIBRARY_VERSION_MINOR "3")
 set(LIBRARY_VERSION_PATCH "0")
 
 set(PROJECT_VERSION "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
