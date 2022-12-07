@@ -5,7 +5,7 @@ set(LIBRARY_NAME "Helpers")
 project(${LIBRARY_NAME} LANGUAGES C )
 
 set(CMAKE_C_STANDARD 99)
-if (NOT MSVC)
+if (NOT WIN32)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 endif()
 
@@ -76,7 +76,7 @@ set(SRC_FILES
 # shared library
 
 add_library(${LIBRARY_NAME} SHARED ${SRC_FILES})
-if (NOT MSVC)
+if (NOT WIN32)
     set_target_properties(${LIBRARY_NAME} PROPERTIES
             COMPILE_OPTIONS -Wextra
             PUBLIC_HEADER "${INC_DIR}/h_bin.h;${INC_DIR}/h_cpc.h;${INC_DIR}/h_lggr.h;${INC_DIR}/h_str.h;${INC_DIR}/h_memory.h;${PROJECT_BINARY_DIR}/helpers-cfg.h"
