@@ -9,6 +9,9 @@ if (NOT WIN32)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 endif()
 
+if(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
 
 # library info
 
