@@ -17,7 +17,7 @@ set(PROJECT_HOMEPAGE_URL "https://github.com/toshaTikhonov/Helpers.git")
 set(PROJECT_BUGREPORT_PATH "https://github.com/toshaTikhonov/Helpers/issues")
 
 set(LIBRARY_VERSION_MAJOR "0")
-set(LIBRARY_VERSION_MINOR "2")
+set(LIBRARY_VERSION_MINOR "3")
 set(LIBRARY_VERSION_PATCH "0")
 
 set(PROJECT_VERSION "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
@@ -92,9 +92,9 @@ endif ()
 option(BUILD_STATIC "Build static library." OFF)
 
 if (BUILD_STATIC)
-    add_library(library_name_static STATIC ${SRC_FILES})
-    target_compile_definitions(library_name_static PUBLIC -DO_STATIC_LIBRARY)
-    set_target_properties(library_name_static PROPERTIES
+    add_library(Helpers_static STATIC ${SRC_FILES})
+    target_compile_definitions(Helpers_static PUBLIC -DO_STATIC_LIBRARY)
+    set_target_properties(Helpers_static PROPERTIES
             OUTPUT_NAME ${LIBRARY_NAME})
 endif ()
 
