@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdarg.h>
+#if defined(WIN32)
+#include <windows.h>
+#endif
 #include "h_lggr.h"
 #include "h_memory.h"
 #include "h_str.h"
@@ -8,6 +11,69 @@
 /* реализует вложенность лога */
 static int log_level = 0;
 
+
+#if defined(WIN32)
+
+#define CLOCK_MONOTONIC 0
+
+LARGE_INTEGER getFILETIMEoffset(void)
+{
+    SYSTEMTIME s;
+    FILETIME f;
+    LARGE_INTEGER t;
+
+    s.wYear = 1970;
+    s.wMonth = 1;
+    s.wDay = 1;
+    s.wHour = 0;
+    s.wMinute = 0;
+    s.wSecond = 0;
+    s.wMilliseconds = 0;
+    SystemTimeToFileTime(&s, &f);
+    t.QuadPart = f.dwHighDateTime;
+    t.QuadPart <<= 32;
+    t.QuadPart |= f.dwLowDateTime;
+    return (t);
+}
+
+int clock_gettime(int X, struct timespec *tv)
+{
+    LARGE_INTEGER           t;
+    FILETIME            f;
+    double                  microseconds;
+    static LARGE_INTEGER    offset;
+    static double           frequencyToMicroseconds;
+    static int              initialized = 0;
+    static BOOL             usePerformanceCounter = 0;
+
+    if (!initialized) {
+        LARGE_INTEGER performanceFrequency;
+        initialized = 1;
+        usePerformanceCounter = QueryPerformanceFrequency(&performanceFrequency);
+        if (usePerformanceCounter) {
+            QueryPerformanceCounter(&offset);
+            frequencyToMicroseconds = (double)performanceFrequency.QuadPart / 1000000.;
+        } else {
+            offset = getFILETIMEoffset();
+            frequencyToMicroseconds = 10.;
+        }
+    }
+    if (usePerformanceCounter) QueryPerformanceCounter(&t);
+    else {
+        GetSystemTimeAsFileTime(&f);
+        t.QuadPart = f.dwHighDateTime;
+        t.QuadPart <<= 32;
+        t.QuadPart |= f.dwLowDateTime;
+    }
+
+    t.QuadPart -= offset.QuadPart;
+    microseconds = (double)t.QuadPart / frequencyToMicroseconds;
+    t.QuadPart = (LONGLONG)microseconds;
+    tv->tv_sec = (long)(t.QuadPart / 1000000);
+    tv->tv_nsec = (long)((t.QuadPart % 1000000)*1000);
+    return (0);
+}
+#endif
 
 /**
   @brief получение времени длялогирования.
