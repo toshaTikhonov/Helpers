@@ -115,8 +115,10 @@ void h_BcdToStr(const char *pdata, unsigned int data_length, char *string)
     string[len-1] = 0;
     for(i = 0; i < data_length; ++i)
     {
-        string[i * 2] =   aux_HiBcdToByte(pdata[i]);
-        string[i * 2 + 1] = aux_LoBcdToByte(pdata[i]);
+        if( aux_HiBcdToByte(pdata[i]) <= 0x9 )
+            string[i * 2] = '0' + aux_HiBcdToByte(pdata[i]);
+        if( aux_LoBcdToByte(pdata[i]) <= 0x9 )
+            string[i * 2 + 1] = '0' + aux_LoBcdToByte(pdata[i]);
     }
 };
 /**

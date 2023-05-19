@@ -126,7 +126,7 @@ static void h_lggr_generate_time(char* buffer, unsigned int size)
 */
 void h_lggr_printf_line(const char *pszFmt, ...)
 {
-  char Buffer[32];
+  char Buffer[64];
   int level;
   va_list lists;
   va_list args;
@@ -155,7 +155,7 @@ void h_lggr_printf_line(const char *pszFmt, ...)
 */
 void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned int lsize)
 {
-    char buff[34];
+    char buff[64];
     unsigned int pos;
     unsigned int i;
     unsigned char* p_data = (unsigned char*)p_p_data;
