@@ -10,6 +10,7 @@
 
 /* реализует вложенность лога */
 static int log_level = 0;
+static unsigned int tickinit = 0;
 
 
 #if defined(WIN32)
@@ -115,7 +116,7 @@ static void h_lggr_print_log( const char* pszFmt, va_list* valist )
 */
 static void h_lggr_generate_time(char* buffer, unsigned int size)
 {
-    unsigned int tickcount = h_get_time();
+    unsigned int tickcount = h_get_time() - tickinit;
     snprintf(buffer,size,"[%d:%d]",tickcount / 1000, tickcount % 1000);
 }
 /**
@@ -188,4 +189,9 @@ void h_lggr_inc_level( void )
 void h_lggr_dec_level( void )
 {
     --log_level;
+}
+
+void h_lggr_start_time( void )
+{
+    tickinit = h_get_time();
 }
