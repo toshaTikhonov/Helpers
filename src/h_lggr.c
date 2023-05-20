@@ -191,6 +191,10 @@ void h_lggr_dec_level( void )
     --log_level;
 }
 
+/**
+  @brief обнуление стартового времени.
+  @return void.
+*/
 void h_lggr_start_time( void )
 {
     tickinit = h_get_time();

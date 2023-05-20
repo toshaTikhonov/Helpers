@@ -109,16 +109,17 @@ void h_HexToStr(const char *pdata, unsigned int data_length, char *string)
 void h_BcdToStr(const char *pdata, unsigned int data_length, char *string)
 {
     unsigned int i;
-    unsigned int len;
+    unsigned char res;
 
-    len= data_length * 2 + 1; /*c  0 на конце*/
-    string[len-1] = 0;
+    string[(data_length * 2 + 1)-1] = 0;
     for(i = 0; i < data_length; ++i)
     {
-        if( aux_HiBcdToByte(pdata[i]) <= 0x9 )
-            string[i * 2] = '0' + aux_HiBcdToByte(pdata[i]);
-        if( aux_LoBcdToByte(pdata[i]) <= 0x9 )
-            string[i * 2 + 1] = '0' + aux_LoBcdToByte(pdata[i]);
+        res = aux_HiBcdToByte(pdata[i]);
+        if( res <= 0x9 )
+            string[i * 2] = (char) ('0' + res);
+        res  = aux_LoBcdToByte(pdata[i]);
+        if( res <= 0x9 )
+            string[i * 2 + 1] =(char) ('0' + res);
     }
 };
 /**
