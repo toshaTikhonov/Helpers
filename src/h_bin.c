@@ -41,7 +41,7 @@ unsigned short  h_BigEndianToUINT16( unsigned char* p_buf )
     unsigned short res_uint;
 
     res_uint  = (unsigned int)(p_buf[0]); res_uint <<= 8;
-    res_uint |= (unsigned int)(p_buf[1]); res_uint <<= 8;
+    res_uint |= (unsigned int)(p_buf[1]);
 
     return res_uint;
 } /* h_BigEndianToUINT16 */
