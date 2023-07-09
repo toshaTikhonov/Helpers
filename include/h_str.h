@@ -20,7 +20,6 @@ extern "C" {
   @param pdata            Указатель на исходные данные.
   @param data_length        Длина исходных данных.
   @param string            Указатель на выходные данные.
-  @return void.
 */
 void h_HexToStr(const char *pdata, unsigned int data_length, char *string);
 /**
@@ -28,7 +27,6 @@ void h_HexToStr(const char *pdata, unsigned int data_length, char *string);
   @param pdata            Указатель на исходные данные.
   @param data_length        Длина исходных данных.
   @param string            Указатель на выходные данные.
-  @return void.
 */
 void h_BcdToStr(const char *pdata, unsigned int data_length, char *string);
 
@@ -37,7 +35,6 @@ void h_BcdToStr(const char *pdata, unsigned int data_length, char *string);
   @param string            Указатель на исходные данные (строка).
   @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
-  @return void.
 */
 void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length);
 /**
@@ -45,13 +42,12 @@ void h_StrToHex(char* string, unsigned char* data, unsigned int* data_length);
   @param string            Указатель на исходные данные (строка).
   @param data              Указатель на выходные данные.
   @param data_length       указатель на длину буфера для выходных данных.
-  @return void.
 */
 void h_StrToBcd(char* string, unsigned char* data, unsigned int* data_length);
 /**
   @brief Расчет длины строки (аналог StrLen).
-  @param string            Указатель на исходные данные (строка).
-  @return unsigned int     Длина стрки без "\x00"
+  @param [in] string            Указатель на исходные данные (строка).
+  @return Длина строки без "00"
 */
 unsigned int h_StrLen(const char* string);
 /**

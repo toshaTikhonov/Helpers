@@ -21,15 +21,15 @@ unsigned char h_cp_1251_to_866 (unsigned char ch);
 /**
     @brief Преобразование символа заданного ch в кодировке 866 
     в кодировку 1251
-    @param   ch   -   символ в колировке 866
-    @retval  символ в кодировке 1251
+    @param[in]   ch   -   символ в колировке 866
+    @return  символ в кодировке 1251
 */
 unsigned char h_cp_866_to_1251 (unsigned char ch);
 /**
     @brief  Преобразование строки из кодовой таблицы 1251 в таблицу 866
-    @param  p_str_src - исходные данные
-    @param  p_str_dst   - буфер, куда помещается результат
-    @retval указатель на p_str_dst
+    @param[in]  p_str_src - исходные данные
+    @param[out]  p_str_dst   - буфер, куда помещается результат
+    @return указатель на p_str_dst
 */
 char * h_cp_1251_to_866_str (char *p_str_src, char *p_str_dst);
 /**
@@ -49,15 +49,15 @@ char * h_cp_866_to_1251_str (char *p_str_src, char *p_str_dst);
 unsigned char * h_cp_Iso8859_05_to_1251 (unsigned char *p_buf_src, unsigned char p_len, unsigned char *p_buf_dest);
 /**
     @brief  Преобразование строки из кодовой таблицы Win1251 to utf8.
-    @param  p_str_src - исходные данные.
-    @param  p_str_dst   - буфер, куда помещается результат (может совпадать с исходным).
-    @retval void.
+    @param[in]  p_str_src - исходные данные.
+    @param[out]  p_str_dst   - буфер, куда помещается результат (может совпадать с исходным).
 */
 void h_cp1251_to_utf8(const char *p_str_src, char *p_str_dst);
 /**
     @brief  Преобразование строки из кодовой таблицы utf8 to Win1251.
     @param[in]  p_str_src   исходные данные.
     @param[out] p_str_dst   буфер, куда помещается результат (может совпадать с исходным).
+    @param[in] n    входная длина.
     @return 0 успешно , -1 не успешно.
 */
 int h_utf8_to_cp1251(const char* p_str_src, char* p_str_dst, unsigned int n);

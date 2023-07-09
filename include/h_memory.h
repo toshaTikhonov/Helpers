@@ -38,7 +38,6 @@ void * h_realloc(void * ptr, size_t size);
 /**
   @brief освобождение буфера памяти (аналог free).
   @param ptr    указатель на буфер памяти.
-  @return void  .
 */
 void h_free(void * ptr);
 /**
@@ -46,7 +45,6 @@ void h_free(void * ptr);
   @param malloc_fn    указатель на функцию malloc.
   @param realloc_fn   указатель на функцию realloc.
   @param free_fn      указатель на функцию free.
-  @return void  .
 */
 void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t free_fn);
 /**
@@ -54,7 +52,6 @@ void h_set_alloc_funcs(h_malloc_t malloc_fn, h_realloc_t realloc_fn, h_free_t fr
   @param malloc_fn    указатель на функцию malloc.
   @param realloc_fn   указатель на функцию realloc.
   @param free_fn      указатель на функцию free.
-  @return void  .
 */
 void h_get_alloc_funcs(h_malloc_t * malloc_fn, h_realloc_t * realloc_fn, h_free_t * free_fn);
 /**

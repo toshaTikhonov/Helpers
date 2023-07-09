@@ -161,7 +161,6 @@ void * h_mem_realloc(void * ptr, size_t size)
 /**
   @brief освобождение буфера памяти (аналог free) в пуле..
   @param ap    указатель на буфер памяти.
-  @return void  .
 */
 void h_mem_free(void* ap)
 {

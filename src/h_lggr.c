@@ -123,7 +123,6 @@ static void h_lggr_generate_time(char* buffer, unsigned int size)
   @brief логирование строки.
   @param pszFmt       Указатель формат выводимых данных.
   @param ...          форматные данные.
-  @return void.
 */
 void h_lggr_printf_line(const char *pszFmt, ...)
 {
@@ -152,7 +151,6 @@ void h_lggr_printf_line(const char *pszFmt, ...)
   @param psz_title    Указатель на заголовок.
   @param p_p_data     Указатель на входные данные.
   @param lsize        Длина исходных данных.
-  @return void.
 */
 void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned int lsize)
 {
@@ -176,7 +174,6 @@ void h_lggr_print_memory(const char *psz_title, const void *p_p_data, unsigned i
 }
 /**
   @brief смещение логирования по строке вправо.
-  @return void.
 */
 void h_lggr_inc_level( void )
 {
@@ -184,7 +181,6 @@ void h_lggr_inc_level( void )
 }
 /**
   @brief смещение логирования по строке влево.
-  @return void.
 */
 void h_lggr_dec_level( void )
 {
@@ -193,7 +189,6 @@ void h_lggr_dec_level( void )
 
 /**
   @brief обнуление стартового времени.
-  @return void.
 */
 void h_lggr_start_time( void )
 {
