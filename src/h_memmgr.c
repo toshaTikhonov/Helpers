@@ -2,39 +2,42 @@
 
 typedef unsigned int Align;
 /**
- * объединение для реализации пула памяти
+  @union объединение для реализации пула памяти
  */
 union mem_header_union
 {
+    /**
+     @struct s описание списка памяти
+     */
     struct
     {
-        /*
-         * Pointer to the next block in the free list
+        /**
+          @var next Указатель на следующий блок в пустом списке
          */
         union mem_header_union* next;
-        /*
-         * Size of the block (in quantas of sizeof(mem_header_t))
+        /**
+           @var size размер блока  (в штуках of sizeof(mem_header_t))
          */
         unsigned int size;
     } s;
-    /*
-     * Used to align headers in memory to a boundary
+    /**
+      @var align_dummy используется для выравнивания заголовков в памяти
      */
     Align align_dummy;
 };
 
 typedef union mem_header_union mem_header_t;
 /**
- * Initial empty list
+ * @brief Initial empty list
  */
 static mem_header_t base;
 
 /**
- * Start of free list
+ * @brief Start of free list
  */
 static mem_header_t* freep = 0;
 /**
- * статический пул памяти для приложения
+ * @brief статический пул памяти для приложения
  */
 static unsigned char pool[POOL_SIZE] = {0};
 static unsigned int pool_free_pos = 0;
