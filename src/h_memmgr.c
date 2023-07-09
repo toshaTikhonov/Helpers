@@ -2,26 +2,20 @@
 
 typedef unsigned int Align;
 /**
-  @union объединение для реализации пула памяти
+  @brief объединение для реализации пула памяти
  */
 union mem_header_union
 {
     /**
-     @struct s описание списка памяти
+          @brief описание списка памяти
      */
     struct
     {
-        /**
-          @var next Указатель на следующий блок в пустом списке
-         */
-        union mem_header_union* next;
-        /**
-           @var size размер блока  (в штуках of sizeof(mem_header_t))
-         */
-        unsigned int size;
+        union mem_header_union* next; /** \brief Указатель на следующий блок в пустом списке */
+        unsigned int size;  /** \brief размер блока  (в штуках of sizeof(mem_header_t)) */
     } s;
     /**
-      @var align_dummy используется для выравнивания заголовков в памяти
+      @brief align_dummy используется для выравнивания заголовков в памяти
      */
     Align align_dummy;
 };
