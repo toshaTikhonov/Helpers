@@ -18,6 +18,6 @@ jobs:
         mkdir build
         cd build
         cmake -DBUILD_HELPERS_TESTING=on -DBUILD_HELPERS_DOCUMENTATION=on ..
-        make test package doc
+        make package doc
         sudo make install
         make clean check
