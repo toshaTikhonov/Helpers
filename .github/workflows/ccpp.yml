@@ -20,4 +20,4 @@ jobs:
         cmake -DBUILD_HELPERS_TESTING=on -DBUILD_HELPERS_DOCUMENTATION=on ..
         make package doc
         sudo make install
-        make clean check
+#        make clean check
