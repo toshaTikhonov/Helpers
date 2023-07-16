@@ -20,6 +20,7 @@ jobs:
         cmake -DBUILD_HELPERS_DOCUMENTATION=on ..
         make package doc
         sudo make install
-        cd ..
-        make
+#        cd ..
+#        cmake .
+#        make
 #        make clean check
