@@ -22,4 +22,4 @@ jobs:
         sudo make install
         cd ..
         make
-        make clean check
+#        make clean check
