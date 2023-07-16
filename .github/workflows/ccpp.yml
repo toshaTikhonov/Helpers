@@ -11,8 +11,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y cmake pkg-config check libsubunit-dev cppcheck doxygen valgrind
-#    - name: cppcheck
-#      run: cppcheck --check-config --force --enable=warning,missingInclude --error-exitcode=1 .
+    - name: cppcheck
+      run: cppcheck --check-config --force --enable=warning,missingInclude --error-exitcode=1 .
     - name: build
       run: |
         mkdir build
@@ -20,7 +20,7 @@ jobs:
         cmake -DBUILD_HELPERS_DOCUMENTATION=on ..
         make package doc
         sudo make install
-#        cd ..
-#        cmake .
-#        make
-#        make clean check
+        cd ..
+        cmake .
+        make
+        make clean check
