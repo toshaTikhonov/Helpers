@@ -1,10 +1,7 @@
 /* Public domain, no copyright. Use at your own risk. */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
-#include <time.h>
 
 #include <check.h>
 #include "h_lggr.h"
