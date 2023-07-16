@@ -17,10 +17,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DBUILD_HELPERS_DOCUMENTATION=on ..
-        make package doc
+        cmake -DBUILD_HELPERS_TESTING=on -DBUILD_HELPERS_DOCUMENTATION=on ..
+        make test package doc
         sudo make install
-        cd ..
-        cmake .
-        make
         make clean check
